@@ -8,5 +8,6 @@ namespace ZeeBi.UI.DataAccess
 		public static MongoServer Server { get { return MongoServer.Create("mongodb://localhost/zeebi"); } }
 		public static MongoDatabase Database { get { return Server.GetDatabase("zeebi"); } }
 		public static MongoCollection<Url> Urls { get { return Database.GetCollection<Url>("urls"); } }
+		public static MongoCollection<PageView> PageViews { get { return Database.GetCollection<PageView>("pageviews"); } }
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using MongoDB.Driver;
 using ZeeBi.UI.DataAccess;
 using ZeeBi.UI.Models;
 using ZeeBi.UI.Services;
@@ -26,10 +27,25 @@ namespace ZeeBi.UI.Controllers
 			if (url == null)
 				return Responses.NotFound;
 
+			RecordAnalytics(url);
+
 			return new RedirectResult(url.LongUrl, false);
 		}
 
-		[HttpPost]
+    	private void RecordAnalytics(Url url)
+    	{
+
+    		DB.PageViews.Insert(new PageView()
+    		                    	{
+    		                    		UrlId = url.Id,
+    		                    		UserAgent = Request.UserAgent,
+    		                    		UserIp = Request.UserHostAddress,
+    		                    		ViewedAt = DateTime.Now
+    		                    	});
+
+    	}
+
+    	[HttpPost]
 		public ActionResult Add(Url url)
 		{
 			try
@@ -60,7 +76,7 @@ namespace ZeeBi.UI.Controllers
     		url.LongUrl = new UrlNormalizer().Normalize(url.LongUrl);
     		url.Created = DateTime.Now;
 
-    		DB.Urls.Insert(url);
+    		DB.Urls.Insert(url, SafeMode.FSyncTrue);
     	}
 
 		[HttpGet]

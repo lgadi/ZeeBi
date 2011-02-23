@@ -1,6 +1,8 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using MongoDB.Driver.Builders;
 using ZeeBi.UI.DataAccess;
+using ZeeBi.UI.ViewModels.Stats;
 
 namespace ZeeBi.UI.Controllers
 {
@@ -16,7 +18,13 @@ namespace ZeeBi.UI.Controllers
 			{
 				return Json(url, JsonRequestBehavior.AllowGet);
 			}
-			return View(url);
+			var pageViewCount = DB.PageViews.Count(Query.EQ("UrlId", id));
+			return View(new StatsViewModel()
+			            	{
+			            		PageViewCount = pageViewCount,
+			            		Url = url
+			            	}	
+						);
 		}		
 	}
 }

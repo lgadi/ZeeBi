@@ -2,17 +2,20 @@
 @using ZeeBi.UI.Views;
 @{
 	ViewBag.Title = "Info";
+	var shortUrl = Url.RouteUrl("Follow", new { id = Model.Url.Id }, "http");
 }
 
-<h2>Info for: @FullRoot/@Model.Url.Id, long URL: @Model.Url.LongUrl</h2>
-<img src="http://chart.apis.google.com/chart?cht=qr&chl=@FullRoot/@Model.Url.Id&choe=UTF-8&chs=100x100" />
-Total page views: @Model.PageViewCount
+<h2>Info for: @shortUrl, long URL: @Model.Url.LongUrl</h2>
+<img src="http://chart.apis.google.com/chart?cht=qr&chl=@shortUrl&choe=UTF-8&chs=100x100" />
+Total page views: @Model.PageViewCount <br />
 
 <div class="table">
 	<table>
 		<thead>
-			<td>UserAgent</td>
-			<td>Count</td>
+			<tr>
+				<td>UserAgent</td>
+				<td>Count</td>
+			</tr>
 		</thead>
 		<tbody>
 		@foreach (var kvp in Model.PageViewsByUserAgent)

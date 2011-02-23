@@ -16,7 +16,7 @@ namespace ZeeBi.UI.Controllers
 		{
 			var url = DB.Urls.FindOneById(id);
 			if (url == null)
-				return new HttpStatusCodeResult(404, "SORRY DUDE, NOT FOUND!");
+				return NotFoundResponse();
 
 			return new RedirectResult(url.LongUrl, false);
 		}
@@ -65,9 +65,16 @@ namespace ZeeBi.UI.Controllers
     	[HttpGet]
     	public ActionResult Created(string id)
     	{
-    		var url = DB.Urls.FindOneById(id);
-			if(url == null) throw new Exception("not found");
-    		return View(url);
+			var url = DB.Urls.FindOneById(id);
+			if (url == null)
+				return NotFoundResponse(); 
+			
+			return View(url);
+    	}
+
+    	private HttpStatusCodeResult NotFoundResponse()
+    	{
+    		return new HttpStatusCodeResult(404, "SORRY DUDE, NOT FOUND!");
     	}
     }
 }

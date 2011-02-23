@@ -1,10 +1,11 @@
 ﻿@model ZeeBi.UI.ViewModels.Stats.StatsViewModel
-
+@using ZeeBi.UI.Views;
 @{
-    ViewBag.Title = "Info";
+	ViewBag.Title = "Info";
 }
 
-<h2>Info for: @Model.Url.Id, long URL: @Model.Url.LongUrl</h2>
+<h2>Info for: @FullRoot/@Model.Url.Id, long URL: @Model.Url.LongUrl</h2>
+<img src="http://chart.apis.google.com/chart?cht=qr&chl=@FullRoot/@Model.Url.Id&choe=UTF-8&chs=100x100" />
 Total page views: @Model.PageViewCount
 
 <div class="table">
@@ -15,7 +16,7 @@ Total page views: @Model.PageViewCount
 		</thead>
 		<tbody>
 		@foreach (var kvp in Model.PageViewsByUserAgent)
-		 {
+  {
 			<tr>
 			<td>@kvp.Key</td>
 			<td>@kvp.Value</td>

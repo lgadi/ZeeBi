@@ -8,7 +8,7 @@
 <h1>Zee.Bi</h1>
 
 <h2>Shorten a URL:</h2>
-<form action="/-/add/" method="post">
+<form action="@Url.Action("add", "urls")" method="post">
 	<div class="form-field">
 		<span class="form-label">@Html.LabelFor(x => x.LongUrl, "URL:")</span>
 		<span class="form-label">@Html.TextBoxFor(x => x.LongUrl)</span>

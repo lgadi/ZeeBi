@@ -27,8 +27,8 @@ namespace ZeeBi.UI
 
 			routes.MapRoute(
 				"Action", // Route name
-				"-/{action}", // URL with parameters
-				new { controller = "UI", action = "Index" } // Parameter defaults
+				"-/{action}/{id}", // URL with parameters
+				new { controller = "UI", action = "Index", id = UrlParameter.Optional} // Parameter defaults
 			);
 		}
 

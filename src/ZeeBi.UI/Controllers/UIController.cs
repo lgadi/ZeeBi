@@ -62,6 +62,14 @@ namespace ZeeBi.UI.Controllers
     		return Guid.NewGuid().ToString().Substring(0, 6);
     	}
 
+		[HttpGet]
+		public ActionResult Info(string id)
+		{
+			var url = DB.Urls.FindOneById(id);
+			if (url == null) throw new Exception("not found");
+			return View(url);
+		}
+
     	[HttpGet]
     	public ActionResult Created(string id)
     	{

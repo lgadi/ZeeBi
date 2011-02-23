@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using ZeeBi.UI.Models;
 
 namespace ZeeBi.UI.ViewModels.Stats
@@ -6,7 +7,6 @@ namespace ZeeBi.UI.ViewModels.Stats
 	{
 		public Url Url { get; set; }
 		public int PageViewCount { get; set; }
-
-
+		public IDictionary<string, int> PageViewsByUserAgent { get; set; }
 	}
 }

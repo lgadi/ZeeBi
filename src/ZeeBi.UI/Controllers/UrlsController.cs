@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using MongoDB.Driver;
 using ZeeBi.UI.DataAccess;
 using ZeeBi.UI.Models;
 
@@ -18,10 +19,17 @@ namespace ZeeBi.UI.Controllers
 			if (url == null)
 				return Responses.NotFound;
 
+			RecordAnalytics(url);
+
 			return new RedirectResult(url.LongUrl, false);
 		}
 
-		[HttpPost]
+    	private void RecordAnalytics(Url url)
+    	{
+//    		DB.Server
+    	}
+
+    	[HttpPost]
 		public ActionResult Add(Url url)
 		{
 			try
@@ -50,7 +58,7 @@ namespace ZeeBi.UI.Controllers
 				}
     		}
 
-    		DB.Urls.Insert(url);
+    		DB.Urls.Insert(url, SafeMode.FSyncTrue);
     	}
 
     	private string GenerateFreeId()

@@ -67,17 +67,16 @@
 	$(function () {
 		$('#id').hint();
 		$('#id').bind('change keyup', function () {
-			if (this.value.length == 0) {
-				$('#id-messages span').hide();
-				return;
-			}
+			$('#id-messages span').hide();
+			
+			if (this.value.length == 0) return;
+
 			if (this.value.length < 5) {
 				$('#id-too-short').show();
 				return;
 			}
 
 			$.getJSON('@Url.Action("isAvailable")', { "id" : this.value }, function (isAvailable) {
-				$('#id-messages span').hide();
 				if (isAvailable) {
 					$('#id-ok').show();
 				} else {
@@ -88,13 +87,11 @@
 		});
 
 		$('#longUrl').bind('change keyup', function () {
-			console.log("here");
-			if (this.value.length == 0) {
-				$('#longUrl-messages span').hide();
-			}
+			$('#longUrl-messages span').hide();
+
+			if (this.value.length == 0) return;
 
 			$.getJSON('@Url.Action("isUrlValid")', { "url" : this.value }, function(valid) {
-				$('#longUrl-messages span').hide();
 				if (!valid) {
 					$('#longUrl-invalid').show();
 				}

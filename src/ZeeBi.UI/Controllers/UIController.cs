@@ -24,7 +24,14 @@ namespace ZeeBi.UI.Controllers
 		[HttpPost]
 		public ActionResult Add(Url url)
 		{
-			AddUrl(url);
+			try
+			{
+				AddUrl(url);
+			}
+			catch (IdAlreadyTakenException ex)
+			{
+				return new HttpStatusCodeResult(409, "ID already taken.");
+			}
 			return RedirectToAction("created", new { id = url.Id });
 		}
 
@@ -39,8 +46,7 @@ namespace ZeeBi.UI.Controllers
 				var existing = DB.Urls.FindOneById(url.Id);
 				if (existing != null)
 				{
-					// TODO: fancy "id is taken" page
-					throw new Exception("Already exists");
+					throw new IdAlreadyTakenException(existing.Id);
 				}
     		}
 
@@ -77,4 +83,14 @@ namespace ZeeBi.UI.Controllers
     		return new HttpStatusCodeResult(404, "SORRY DUDE, NOT FOUND!");
     	}
     }
+
+	internal class IdAlreadyTakenException : Exception
+	{
+		public IdAlreadyTakenException(string id)
+		{
+			Id = id;
+		}
+
+		protected string Id { get; set; }
+	}
 }

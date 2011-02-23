@@ -72,7 +72,8 @@ namespace ZeeBi.UI.Controllers
 		public ActionResult Info(string id)
 		{
 			var url = DB.Urls.FindOneById(id);
-			if (url == null) throw new Exception("not found");
+			if (url == null)
+				return NotFoundResponse(); 
 			return View(url);
 		}
 

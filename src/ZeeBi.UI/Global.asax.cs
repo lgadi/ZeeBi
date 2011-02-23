@@ -17,15 +17,17 @@ namespace ZeeBi.UI
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+			routes.MapRoute("Default", "", new { controller = "UI", action = "Index" });
+
 			routes.MapRoute(
-				"Redirect", // Route name
+				"Follow", // Route name
 				"{id}", // URL with parameters
-				new { controller = "UI", action = "Redirect" } // Parameter defaults
+				new { controller = "UI", action = "Follow" } // Parameter defaults
 			);
 
 			routes.MapRoute(
-				"Default", // Route name
-				"{controller}/{action}", // URL with parameters
+				"Action", // Route name
+				"-/{action}", // URL with parameters
 				new { controller = "UI", action = "Index" } // Parameter defaults
 			);
 		}

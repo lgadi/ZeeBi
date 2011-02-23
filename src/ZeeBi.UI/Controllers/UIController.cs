@@ -83,7 +83,17 @@ namespace ZeeBi.UI.Controllers
 			return View(url);
 		}
 
-    	[HttpGet]
+		[HttpGet]
+		public ActionResult IsAvailable(string id)
+		{
+			var url = DB.Urls.FindOneById(id);
+			if (url == null)
+				return Json(true, JsonRequestBehavior.AllowGet);
+
+			return Json(false, JsonRequestBehavior.AllowGet);
+		}
+		
+		[HttpGet]
     	public ActionResult Created(string id)
     	{
 			var url = DB.Urls.FindOneById(id);

@@ -73,6 +73,7 @@
     <Compile Include="Models\Url.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\IdGenerator.cs" />
+    <Compile Include="Services\UrlNormalizer.cs" />
     <Compile Include="ViewModels\Stats\StatsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

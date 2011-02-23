@@ -73,6 +73,9 @@ namespace ZeeBi.UI.Controllers
 				}
     		}
 
+    		url.LongUrl = new UrlNormalizer().Normalize(url.LongUrl);
+    		url.Created = DateTime.Now;
+
     		DB.Urls.Insert(url, SafeMode.FSyncTrue);
     	}
 

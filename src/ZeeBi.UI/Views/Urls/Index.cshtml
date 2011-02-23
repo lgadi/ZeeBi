@@ -36,7 +36,7 @@
 	}
 </style>
 
-<form action="/-/add/" method="post">
+<form action="@Url.Action("add", "urls")" method="post">
 	<div class="form-field">
 		<label for="longUrl">URL:</label>		<input id="longUrl" name="longUrl" type="text" />	</div>
 	<div class="form-field">		<label for="id">Short URL:</label>		<input id="id" name="id" type="text" title="optional - we will generate one for you" />		<span id="id-messages" class="messages">			<span id="id-too-short" class="error">Too short - 5 characters minimum</span>			<span id="id-duplicate" class="error">Sorry, this is taken</span>			<span id="id-ok">available!</span>		</span>	</div>

@@ -1,11 +1,11 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Linq.Expressions;
+using System.Web.Mvc;
 using System.Web.Routing;
+using ZeeBi.UI.Controllers;
 
 namespace ZeeBi.UI
 {
-	// Note: For instructions on enabling IIS6 or IIS7 classic mode, 
-	// visit http://go.microsoft.com/?LinkId=9394801
-
 	public class MvcApplication : System.Web.HttpApplication
 	{
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
@@ -13,24 +13,20 @@ namespace ZeeBi.UI
 			filters.Add(new HandleErrorAttribute());
 		}
 
+		private static string Name<T>()
+		{
+			return typeof(T).Name.Replace("Controller", string.Empty);
+		}
+
 		public static void RegisterRoutes(RouteCollection routes)
 		{
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-			routes.MapRoute("Default", "", new { controller = "UI", action = "Index" });
-
+			routes.MapRoute("Home", "", new { controller = Name<UrlsController>(), action = "Index" });
+		
+			routes.MapRoute("Default", "-/{controller}/{action}/{id}", new { id = UrlParameter.Optional });
 			
-			routes.MapRoute(
-				"Follow", // Route name
-				"{id}", // URL with parameters
-				new { controller = "UI", action = "Follow" } // Parameter defaults
-			);
-
-			routes.MapRoute(
-				"Action", // Route name
-				"-/{action}/{id}", // URL with parameters
-				new { controller = "UI", id = UrlParameter.Optional} // Parameter defaults
-			);
+			routes.MapRoute("Follow", "{id}", new { controller = Name<UrlsController>(), action = "Follow" });
 		}
 
 		protected void Application_Start()

@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Web.Helpers;
 using System.Web.Mvc;
 using ZeeBi.UI.DataAccess;
 using ZeeBi.UI.Models;
-using System.Linq;
 
 namespace ZeeBi.UI.Controllers
 {
-    public class UIController : Controller
+    public class UrlsController : Controller
     {
         public ActionResult Index()
         {
@@ -18,7 +16,7 @@ namespace ZeeBi.UI.Controllers
 		{
 			var url = DB.Urls.FindOneById(id);
 			if (url == null)
-				return NotFoundResponse();
+				return Responses.NotFound;
 
 			return new RedirectResult(url.LongUrl, false);
 		}
@@ -30,7 +28,7 @@ namespace ZeeBi.UI.Controllers
 			{
 				AddUrl(url);
 			}
-			catch (IdAlreadyTakenException ex)
+			catch (IdAlreadyTakenException)
 			{
 				return new HttpStatusCodeResult(409, "ID already taken.");
 			}
@@ -71,19 +69,6 @@ namespace ZeeBi.UI.Controllers
     	}
 
 		[HttpGet]
-		public ActionResult Info(string id)
-		{
-			var url = DB.Urls.FindOneById(id);
-			if (url == null)
-				return NotFoundResponse(); 
-			if (Request.AcceptTypes != null && Request.AcceptTypes.Contains("application/json"))
-			{
-				return Json(url, JsonRequestBehavior.AllowGet);
-			}
-			return View(url);
-		}
-
-		[HttpGet]
 		public ActionResult IsAvailable(string id)
 		{
 			var url = DB.Urls.FindOneById(id);
@@ -98,18 +83,14 @@ namespace ZeeBi.UI.Controllers
     	{
 			var url = DB.Urls.FindOneById(id);
 			if (url == null)
-				return NotFoundResponse(); 
+				return Responses.NotFound; 
 			
 			return View(url);
     	}
 
-    	private HttpStatusCodeResult NotFoundResponse()
-    	{
-    		return new HttpStatusCodeResult(404, "SORRY DUDE, NOT FOUND!");
-    	}
     }
 
-	internal class IdAlreadyTakenException : Exception
+	public class IdAlreadyTakenException : Exception
 	{
 		public IdAlreadyTakenException(string id)
 		{

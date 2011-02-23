@@ -36,21 +36,9 @@ namespace ZeeBi.UI.Controllers
 
 		private Dictionary<string, int> GetPageViewsByUserAgent(IMongoQuery query)
 		{
-			var map = new BsonJavaScript(@"
-function() {
-	emit(this.UserAgent, 1);
-}");
-
-			var reduce = new BsonJavaScript(@"
-function(key, values) {
-	var total = 0;
-	for (var i in values) {
-		total += values[i];
-	}
-	return total;
-}");
-			var results = DB.PageViews.MapReduce(query, map, reduce, MapReduceOptions.SetOutput(MapReduceOutput.Inline)).InlineResults.ToList();
-			return results.ToDictionary(x => x["_id"].AsString, x => x["value"].ToInt32());
+			var reduce = new BsonJavaScript("function(o, agg) { agg.count++; }");
+			var results = DB.PageViews.Group(query, "UserAgent", new { count = 0 }.ToBsonDocument(), reduce, null).ToList();
+			return results.ToDictionary(x => x["UserAgent"].AsString, x => x["count"].ToInt32());
 		}
 	}
 }

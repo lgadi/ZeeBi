@@ -25,22 +25,36 @@ namespace ZeeBi.UI.Controllers
 		public ActionResult Add(Url url)
 		{
 			AddUrl(url);
-			return RedirectToAction("Created", new { id = url.Id });
+			return RedirectToAction("created", new { id = url.Id });
 		}
 
     	private void AddUrl(Url url)
     	{
     		if (url.Id == null)
     		{
-    			url.Id = GenerateId();
+    			url.Id = GenerateFreeId();
     		}
     		else
     		{
 				var existing = DB.Urls.FindOneById(url.Id);
-				if (existing != null) throw new Exception("Already exists");
+				if (existing != null)
+				{
+					// TODO: fancy "id is taken" page
+					throw new Exception("Already exists");
+				}
     		}
 
     		DB.Urls.Insert(url);
+    	}
+
+    	private string GenerateFreeId()
+    	{
+    		string id;
+    		do
+    		{
+    			id = GenerateId();
+    		} while (DB.Urls.FindOneById(id) != null);
+    		return id;
     	}
 
     	private string GenerateId()
@@ -51,7 +65,9 @@ namespace ZeeBi.UI.Controllers
     	[HttpGet]
     	public ActionResult Created(string id)
     	{
-    		throw new NotImplementedException();
+    		var url = DB.Urls.FindOneById(id);
+			if(url == null) throw new Exception("not found");
+    		return View(url);
     	}
     }
 }

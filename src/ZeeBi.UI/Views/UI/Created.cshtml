@@ -1,0 +1,9 @@
+﻿@model ZeeBi.UI.Models.Url
+		   
+@{
+    ViewBag.Title = "Created";
+}
+
+<h2>URL Shortened!</h2>
+
+Your short url is: <a href="/@Model.Id">@Url.RouteUrl("Follow", new { id = Model.Id })</a>

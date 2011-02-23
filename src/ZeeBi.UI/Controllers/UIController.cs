@@ -13,6 +13,8 @@ namespace ZeeBi.UI.Controllers
 		public ActionResult Redirect(string id)
 		{
 			var url = DB.Urls.FindOneById(id);
+			if (url == null)
+				return new HttpStatusCodeResult(404, "SORRY DUDE, NOT FOUND!");
 
 			return new RedirectResult(url.LongUrl, false);
 		}

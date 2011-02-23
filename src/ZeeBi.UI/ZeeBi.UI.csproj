@@ -72,6 +72,7 @@
     </Compile>
     <Compile Include="Models\Url.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IdGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />

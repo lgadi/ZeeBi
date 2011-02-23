@@ -2,11 +2,19 @@
 using System.Web.Mvc;
 using ZeeBi.UI.DataAccess;
 using ZeeBi.UI.Models;
+using ZeeBi.UI.Services;
 
 namespace ZeeBi.UI.Controllers
 {
     public class UrlsController : Controller
     {
+    	private IdGenerator _idGenerator;
+
+    	public UrlsController()
+    	{
+    		_idGenerator = new IdGenerator(); // todo IOC?
+    	}
+
         public ActionResult Index()
         {
             return View();
@@ -39,43 +47,24 @@ namespace ZeeBi.UI.Controllers
     	{
     		if (url.Id == null)
     		{
-    			url.Id = GenerateFreeId();
+    			url.Id = _idGenerator.Generate();
     		}
     		else
     		{
-				var existing = DB.Urls.FindOneById(url.Id);
-				if (existing != null)
+				if (_idGenerator.IsTaken(url.Id))
 				{
-					throw new IdAlreadyTakenException(existing.Id);
+					throw new IdAlreadyTakenException(url.Id);
 				}
     		}
 
     		DB.Urls.Insert(url);
     	}
 
-    	private string GenerateFreeId()
-    	{
-    		string id;
-    		do
-    		{
-    			id = GenerateId();
-    		} while (DB.Urls.FindOneById(id) != null);
-    		return id;
-    	}
-
-    	private string GenerateId()
-    	{
-    		return Guid.NewGuid().ToString().Substring(0, 6);
-    	}
-
 		[HttpGet]
 		public ActionResult IsAvailable(string id)
 		{
-			var url = DB.Urls.FindOneById(id);
-			if (url == null)
-				return Json(true, JsonRequestBehavior.AllowGet);
-
-			return Json(false, JsonRequestBehavior.AllowGet);
+			var available = !_idGenerator.IsTaken(id);
+			return Json(available, JsonRequestBehavior.AllowGet);
 		}
 		
 		[HttpGet]

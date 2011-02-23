@@ -7,19 +7,22 @@ using ZeeBi.UI.Services;
 
 namespace ZeeBi.UI.Controllers
 {
-    public class UrlsController : Controller
-    {
-    	private IdGenerator _idGenerator;
+	public class UrlsController : Controller
+	{
+		private readonly IdGenerator _idGenerator;
+		private readonly UrlNormalizer _urlNormalizer;
 
-    	public UrlsController()
-    	{
-    		_idGenerator = new IdGenerator(); // todo IOC?
-    	}
+		public UrlsController()
+		{
+			// todo IOC?
+			_idGenerator = new IdGenerator(); 
+			_urlNormalizer = new UrlNormalizer();
+		}
 
-        public ActionResult Index()
-        {
-            return View();
-        }
+		public ActionResult Index()
+		{
+			return View();
+		}
 
 		public ActionResult Follow(string id)
 		{
@@ -32,20 +35,18 @@ namespace ZeeBi.UI.Controllers
 			return new RedirectResult(url.LongUrl, false);
 		}
 
-    	private void RecordAnalytics(Url url)
-    	{
+		private void RecordAnalytics(Url url)
+		{
 
-    		DB.PageViews.Insert(new PageView()
-    		                    	{
-    		                    		UrlId = url.Id,
-    		                    		UserAgent = Request.UserAgent,
-    		                    		UserIp = Request.UserHostAddress,
-    		                    		ViewedAt = DateTime.Now
-    		                    	});
+			DB.PageViews.Insert(new PageView() {
+				UrlId = url.Id,
+				UserAgent = Request.UserAgent,
+				UserIp = Request.UserHostAddress,
+				ViewedAt = DateTime.Now
+			});
+		}
 
-    	}
-
-    	[HttpPost]
+		[HttpPost]
 		public ActionResult Add(Url url)
 		{
 			try
@@ -59,25 +60,37 @@ namespace ZeeBi.UI.Controllers
 			return RedirectToAction("created", new { id = url.Id });
 		}
 
-    	private void AddUrl(Url url)
-    	{
-    		if (url.Id == null)
-    		{
-    			url.Id = _idGenerator.Generate();
-    		}
-    		else
-    		{
+		private void AddUrl(Url url)
+		{
+			if (url.Id == null)
+			{
+				url.Id = _idGenerator.Generate();
+			}
+			else
+			{
 				if (_idGenerator.IsTaken(url.Id))
 				{
 					throw new IdAlreadyTakenException(url.Id);
 				}
-    		}
+			}
 
-    		url.LongUrl = new UrlNormalizer().Normalize(url.LongUrl);
-    		url.Created = DateTime.Now;
+			url.LongUrl = new UrlNormalizer().Normalize(url.LongUrl);
+			if (url.LongUrl == null) throw new InvalidUrlException(url.LongUrl);
+			url.Created = DateTime.Now;
 
-    		DB.Urls.Insert(url, SafeMode.FSyncTrue);
-    	}
+			DB.Urls.Insert(url, SafeMode.FSyncTrue);
+		}
+
+		[HttpGet]
+		public ActionResult Created(string id)
+		{
+			var url = DB.Urls.FindOneById(id);
+			if (url == null)
+				return Responses.NotFound;
+
+			return View(url);
+		}
+
 
 		[HttpGet]
 		public ActionResult IsAvailable(string id)
@@ -85,18 +98,29 @@ namespace ZeeBi.UI.Controllers
 			var available = !_idGenerator.IsTaken(id);
 			return Json(available, JsonRequestBehavior.AllowGet);
 		}
-		
-		[HttpGet]
-    	public ActionResult Created(string id)
-    	{
-			var url = DB.Urls.FindOneById(id);
-			if (url == null)
-				return Responses.NotFound; 
-			
-			return View(url);
-    	}
 
-    }
+		[HttpGet]
+		public ActionResult IsUrlValid(string url)
+		{
+			var valid = _urlNormalizer.IsValid(url);
+			return Json(valid, JsonRequestBehavior.AllowGet);
+		}
+	}
+
+	internal class InvalidUrlException : Exception
+	{
+		public string LongUrl { get; set; }
+
+		public InvalidUrlException(string longUrl)
+		{
+			LongUrl = longUrl;
+		}
+
+		public override string Message
+		{
+			get { return "The specified URL is invalid."; }
+		}
+	}
 
 	public class IdAlreadyTakenException : Exception
 	{
@@ -106,5 +130,10 @@ namespace ZeeBi.UI.Controllers
 		}
 
 		protected string Id { get; set; }
+
+		public override string Message
+		{
+			get { return "The specified ID is already taken."; }
+		}
 	}
 }

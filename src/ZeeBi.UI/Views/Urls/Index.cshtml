@@ -40,6 +40,9 @@
 	<div class="form-field">
 		<label for="longUrl">URL:</label>
 		<input id="longUrl" name="longUrl" type="text" />
+		<span id="longUrl-messages" class="messages">
+			<span id="longUrl-invalid" class="error">This seems to be an invalid URL</span>
+		</span>
 	</div>
 
 	<div class="form-field">
@@ -73,17 +76,29 @@
 				return;
 			}
 
-			var url = '@Url.Action("isavailable")/' + encodeURIComponent(this.value);
-			$.getJSON(url, function (isAvailable) {
+			$.getJSON('@Url.Action("isAvailable")', { "id" : this.value }, function (isAvailable) {
+				$('#id-messages span').hide();
 				if (isAvailable) {
-					$('#id-messages span').hide();
 					$('#id-ok').show();
 				} else {
-					$('#id-messages span').hide();
 					$('#id-duplicate').show();
 				}
 			});
 
+		});
+
+		$('#longUrl').bind('change keyup', function () {
+			console.log("here");
+			if (this.value.length == 0) {
+				$('#longUrl-messages span').hide();
+			}
+
+			$.getJSON('@Url.Action("isUrlValid")', { "url" : this.value }, function(valid) {
+				$('#longUrl-messages span').hide();
+				if (!valid) {
+					$('#longUrl-invalid').show();
+				}
+			});
 		});
 	});
 </script>

@@ -19,6 +19,7 @@ namespace ZeeBi.UI
 
 			routes.MapRoute("Default", "", new { controller = "UI", action = "Index" });
 
+			
 			routes.MapRoute(
 				"Follow", // Route name
 				"{id}", // URL with parameters

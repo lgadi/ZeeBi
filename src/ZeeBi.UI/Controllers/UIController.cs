@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using ZeeBi.UI.DataAccess;
 using ZeeBi.UI.Models;
+using System.Linq;
 
 namespace ZeeBi.UI.Controllers
 {
@@ -74,6 +76,10 @@ namespace ZeeBi.UI.Controllers
 			var url = DB.Urls.FindOneById(id);
 			if (url == null)
 				return NotFoundResponse(); 
+			if (Request.AcceptTypes != null && Request.AcceptTypes.Contains("application/json"))
+			{
+				return Json(url, JsonRequestBehavior.AllowGet);
+			}
 			return View(url);
 		}
 

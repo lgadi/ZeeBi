@@ -1,8 +1,9 @@
-﻿@model ZeeBi.UI.Models.Url
+﻿@model ZeeBi.UI.ViewModels.Stats.StatsViewModel
 
 @{
     ViewBag.Title = "Info";
 }
 
-<h2>Info for: @Model.Id, long URL: @Model.LongUrl</h2>
+<h2>Info for: @Model.Url.Id, long URL: @Model.Url.LongUrl</h2>
+Total page views: @Model.PageViewCount
 

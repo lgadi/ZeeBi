@@ -34,7 +34,15 @@ namespace ZeeBi.UI.Controllers
 
     	private void RecordAnalytics(Url url)
     	{
-//    		DB.Server
+
+    		DB.PageViews.Insert(new PageView()
+    		                    	{
+    		                    		UrlId = url.Id,
+    		                    		UserAgent = Request.UserAgent,
+    		                    		UserIp = Request.UserHostAddress,
+    		                    		ViewedAt = DateTime.Now
+    		                    	});
+
     	}
 
     	[HttpPost]

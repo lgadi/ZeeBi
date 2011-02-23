@@ -1,0 +1,82 @@
+﻿@model ZeeBi.UI.Models.Url
+		   
+@{
+    ViewBag.Title = "Zee.Bi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Zee.Bi</h1>
+
+<h2>Shorten a URL:</h2>
+<<<<<<< HEAD
+
+<style type="text/css">
+	
+	.messages span { display:none; color:Green;}
+	
+	form label 
+	{
+		display:inline-block;
+		width:100px;
+		text-align:right;
+		padding-right:3px;
+	}
+	
+	form input[type=text]
+	{
+		width : 400px;
+	}
+	
+	form input.blur
+	{
+		color : #ccc;
+	}
+	.messages .error 
+	{
+		color:Red;
+	}
+</style>
+
+<form action="/-/add/" method="post">
+=======
+<form action="@Url.Action("add", "urls")" method="post">
+>>>>>>> b29e6facff90fdc4e79fbe768b1f84bd2d0d4004
+	<div class="form-field">
+		<label for="longUrl">URL:</label>		<input id="longUrl" name="longUrl" type="text" />	</div>
+	<div class="form-field">		<label for="id">Short URL:</label>		<input id="id" name="id" type="text" title="optional - we will generate one for you" />		<span id="id-messages" class="messages">			<span id="id-too-short" class="error">Too short - 5 characters minimum</span>			<span id="id-duplicate" class="error">Sorry, this is taken</span>			<span id="id-ok">available!</span>		</span>	</div>
+	<div class="form-actions">
+		<input type="submit" text="Shorten it!" />
+	</div>
+</form>
+
+<script type="text/javascript" src="../../Scripts/jquery-1.5.min.js"></script>
+<script type="text/javascript" src="../../Scripts/jquery.hint.js"></script>
+
+<script type="text/javascript">
+
+	$(function () {
+		$('#id').hint();
+		$('#id').bind('change keyup', function () {
+			if (this.value.length == 0) {
+				$('#id-messages span').hide();
+				return;
+			}
+			if (this.value.length < 5) {
+				$('#id-too-short').show();
+				return;
+			}
+
+			$.getJSON('/-/isavailable/' + encodeURIComponent(this.value), function (isAvailable) {
+				if (isAvailable) {
+					$('#id-messages span').hide();
+					$('#id-ok').show();
+				} else {
+					$('#id-messages span').hide();
+					$('#id-duplicate').show();
+				}
+			});
+
+		});
+	});
+</script>
+

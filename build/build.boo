@@ -1,11 +1,11 @@
 import System.Environment 
 import System.IO
 
-import GitSharp 
+#import GitSharp 
 
 projectName = "ZeeBi.UI"
 
-repo as Repository
+#repo as Repository
 version as string
 srcRoot = "..\\src\\"
 slnFile = Path.Combine(srcRoot, "${projectName}.sln");
@@ -13,24 +13,19 @@ configuration = 'Release'
 rootDir = Directory.GetCurrentDirectory()
 outDir = Path.Combine(rootDir, "out")
 
-def getRepo:
-	if repo == null:
-		repo = Repository(Directory.GetCurrentDirectory())
-	return repo 
+#def getRepo:
+#	if repo == null:
+#		repo = Repository(Directory.GetCurrentDirectory())
+#	return repo 
 
 def writeBuildInfo:
 	sourceOutFilename = Path.Combine(outDir, 'BuildInfo.txt')
 	lines = ["Build info:","===================="]
 	lines.Add(" at: " + System.DateTime.UtcNow)
-	lines.Add(" branch: " + repo.CurrentBranch.Name)
-	lines.Add(" commit: " + repo.Head.CurrentCommit.Hash)
+	lines.Add(" branch: master")
+	lines.Add(" commit: " + System.Environment.GetEnvironmentVariable('GIT_COMMIT_HEAD'))
 	
 	File.WriteAllLines(sourceOutFilename, array(string, lines))
-
-def revertAssemblyInfo:
-	index = Index(repo)
-	fullpath = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "src/SolutionAssemblyInfo.cs"))
-	index.Checkout(fullpath)
 
 def copyDir(source as string, dest as string, search):
 	for dirPath in Directory.GetDirectories(source, "*", SearchOption.AllDirectories):
@@ -39,7 +34,7 @@ def copyDir(source as string, dest as string, search):
 	for newPath in Directory.GetFiles(source, search, SearchOption.AllDirectories):
 		cp(newPath, newPath.Replace(source, dest))
 
-getRepo()
+#getRepo()
 
 
 desc "set build configuration to Debug"

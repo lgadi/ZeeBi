@@ -10,3 +10,7 @@
 /src/*.sln.cache
 
 /src/*.TeamCity.user
+
+
+#build packahe output
+/build/out

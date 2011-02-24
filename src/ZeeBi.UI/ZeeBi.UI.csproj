@@ -42,6 +42,9 @@
     <Reference Include="MongoDB.Driver">
       <HintPath>..\..\lib\MongoDB.Driver.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.0.1\lib\40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.5.9.10348\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -77,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ApiController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\InfoController.cs" />
     <Compile Include="Controllers\DeployController.cs" />
     <Compile Include="Controllers\Responses.cs" />
     <Compile Include="Controllers\StatsController.cs" />

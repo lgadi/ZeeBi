@@ -2,23 +2,43 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using System.Web.Script.Serialization;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ZeeBi.UI.Controllers
 {
 	public class DeployController : Controller
 	{
-		//[HttpPost]
-		[HttpGet]
+				string GetCommits(JObject payload)
+		{
+			try
+			{
+				var commits =  payload["commits"]
+					.Cast<JObject>()
+					.OrderByDescending(c=>c["timestamp"].ToString())
+					.ToArray();
+
+				return JsonConvert.SerializeObject(commits, Formatting.Indented);
+			}
+			catch (Exception)
+			{
+				return string.Empty;
+			}
+		}
 		public ActionResult Deploy(string payload)
 		{
 
-			var sentPayload = new JavaScriptSerializer().Deserialize<Dictionary<string, object>>(payload);
+			var sentPayload = JsonConvert.DeserializeObject<JObject>(payload);
+
 			var head = sentPayload["after"].ToString();
+
+			var commits = GetCommits(sentPayload);
 
 			var sourcesUrl = "https://github.com/lgadi/ZeeBi/zipball/master";
 			var logFile = @"C:\ZeeBi\deploy.log";
@@ -57,6 +77,7 @@ namespace ZeeBi.UI.Controllers
 							ErrorDialog = false,
 						};
 						startInfo.EnvironmentVariables.Add("GIT_COMMIT_HEAD", head);
+						startInfo.EnvironmentVariables.Add("GIT_COMMITS", head);
 						var p = Process.Start(startInfo);
 						p.OutputDataReceived += (proc, data) => output.AppendLine(data.Data);
 						p.BeginOutputReadLine();

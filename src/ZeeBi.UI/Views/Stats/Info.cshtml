@@ -1,31 +1,67 @@
 ﻿@model ZeeBi.UI.ViewModels.Stats.StatsViewModel
 @using ZeeBi.UI.Views;
 @{
-	ViewBag.Title = "Info";
+	ViewBag.Title = "Details for @Model.Url.Id";
 	var shortUrl = Url.RouteUrl("Follow", new { id = Model.Url.Id }, "http");
 }
 
-<h2>Info for: @shortUrl, long URL: @Model.Url.LongUrl</h2>
-<img src="http://chart.apis.google.com/chart?cht=qr&chl=@shortUrl&choe=UTF-8&chs=100x100" />
-Total page views: @Model.PageViewCount <br />
+<style>
+	#qrcode-container
+	{
+		float: right;
+		background-color: white;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+	}
+	
+	.stat-field 
+	{
+		width: 600px;
+		text-align: left;
+		margin: 10px auto;
+	}
+</style>
 
-<div class="table">
-	<table>
-		<thead>
-			<tr>
-				<td>UserAgent</td>
-				<td>Count</td>
-			</tr>
-		</thead>
-		<tbody>
-		@foreach (var kvp in Model.PageViewsByUserAgent)
-  {
-			<tr>
-			<td>@kvp.Key</td>
-			<td>@kvp.Value</td>
-			</tr>
-		 }
-		</tbody>
-	</table>
+<h2>Info for @shortUrl</h2>
+
+<div class="box">
+	<div id="qrcode-container">
+		<img alt="QR code for @shortUrl" title="QR code for @shortUrl" src="http://chart.apis.google.com/chart?cht=qr&chl=@shortUrl&choe=UTF-8&chs=100x100" />
+	</div>
+
+	<div class="stat-field">
+		Long URL: <a href="@Model.Url.LongUrl">@Model.Url.LongUrl</a>
+	</div>
+
+	<div class="stat-field">
+	Total page views: @Model.PageViewCount <br />
+
+	<div class="stat-field">
+		<div class="table">
+			@if (Model.PageViewCount == 0) {
+				<text>Once you get some page views, we will break them down for you.</text>
+			} else {
+				<table>
+					<thead>
+						<tr>
+							<td>UserAgent</td>
+							<td>Count</td>
+						</tr>
+					</thead>
+					<tbody>
+					@foreach (var kvp in Model.PageViewsByUserAgent)
+					{
+						<tr>
+						<td>@kvp.Key</td>
+						<td>@kvp.Value</td>
+						</tr>
+					}
+					</tbody>
+				</table>
+			}
+		</div>
+	</div>
 </div>
 

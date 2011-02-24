@@ -1,11 +1,17 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>@ViewBag.Title</title>
+    <title>@(string.IsNullOrEmpty(ViewBag.Title) ? string.Empty : ViewBag.Title + " | ")extremelylongurlshorteningserviceprovider.info</title>
+	<link href="@Url.Content("~/Content/reset.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
-    @RenderBody()
+	<div id="content">
+		<div id="header">
+			<h1>extremelylongurlshorteningserviceprovider.info</h1>
+		</div>
+		@RenderBody()
+	</div>
 </body>
 </html>

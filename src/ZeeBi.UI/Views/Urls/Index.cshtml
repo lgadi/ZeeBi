@@ -1,62 +1,86 @@
 ﻿@model ZeeBi.UI.Models.Url
 		   
-@{
-    ViewBag.Title = "Zee.Bi";
-}
-
-<h1>Zee.Bi</h1>
-
-<h2>Shorten a URL:</h2>
-
 <style type="text/css">
 	
+	.messages { width: 600px; min-height: 16px; padding: 2px; text-align: right; }
 	.messages span { display:none; color:Green;}
+	
+	.form-field 
+	{
+		margin: 10px auto;
+		width: 620px; 
+	}
+	
+	.form-actions
+	{
+		margin: 25px 0 10px;
+	}
 	
 	form label 
 	{
-		display:inline-block;
-		width:100px;
-		text-align:right;
-		padding-right:3px;
+		display: inline-block;
+		width: 395px;
+		text-align: right;
+		padding-right: 3px;
 	}
 	
-	form input[type=text]
+	#longUrl
 	{
-		width : 400px;
+		width : 600px;
 	}
 	
+	#id { width : 200px; }
+	
+	#submit 
+	{
+		width: 200px;
+		border: 1px solid black;
+		background-color: #65826c;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		color: white;
+		font-weight: bold;
+		font-size: 16pt;
+	}
+
 	form input.blur
 	{
-		color : #ccc;
+		color : #bbb;
 	}
+	
 	.messages .error 
 	{
 		color:Red;
 	}
 </style>
 
-<form action="@Url.Action("add", "urls")" method="post">
-	<div class="form-field">
-		<label for="longUrl">URL:</label>
-		<input id="longUrl" name="longUrl" type="text" />
-		<span id="longUrl-messages" class="messages">
-			<span id="longUrl-invalid" class="error">This seems to be an invalid URL</span>
-		</span>
-	</div>
+<h2>Shorten a URL!</h2>
 
-	<div class="form-field">
-		<label for="id">Short URL:</label>
-		<input id="id" name="id" type="text" title="optional - we will generate one for you" />
-		<span id="id-messages" class="messages">
-			<span id="id-too-short" class="error">Too short - 5 characters minimum</span>
-			<span id="id-duplicate" class="error">Sorry, this is taken</span>
-			<span id="id-ok">available!</span>
-		</span>
-	</div>
-	<div class="form-actions">
-		<input type="submit" text="Shorten it!" />
-	</div>
-</form>
+<div class="box">
+	<form action="@Url.Action("add", "urls")" method="post">
+		<div class="form-field">
+			<input id="longUrl" name="longUrl" type="text" title="enter a URL to shorten"/>
+			<div id="longUrl-messages" class="messages">
+				<span id="longUrl-invalid" class="error">I don't think that's a valid URL</span>
+			</div>
+		</div>
+
+		<div class="form-field">
+			<!-- <label for="id">@Url.RouteUrl("Follow", new { id = "XXX" }, "http").Replace("XXX", "")</label> -->
+			<label for="id">http://extremelylongurlshorteningserviceprovider.info/</label>
+			<input id="id" name="id" type="text" title="we'll make something up" />
+			<div id="id-messages" class="messages">
+				<span id="id-too-short" class="error">we need at least 5 characters</span>
+				<span id="id-duplicate" class="error">looks like this is already taken</span>
+				<span id="id-ok">available!</span>
+			</div>
+		</div>
+		<div class="form-actions">
+			<input id="submit" type="submit" value="Shorten it!" />
+		</div>
+	</form>
+</div>
 
 <script type="text/javascript" src="@Url.Content("Scripts/lib/jquery-1.5.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("Scripts/lib/jquery.hint.js")"></script>
@@ -64,7 +88,7 @@
 <script type="text/javascript">
 
 	$(function () {
-		$('#id').hint();
+		$('#id, #longUrl').hint();
 		$('#id').bind('change keyup', function () {
 			$('#id-messages span').hide();
 			

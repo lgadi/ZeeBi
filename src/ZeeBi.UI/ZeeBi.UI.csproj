@@ -88,6 +88,8 @@
     <Compile Include="Views\WebViewPage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\img\background.png" />
+    <Content Include="Content\reset.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\lib\jquery.hint.js" />

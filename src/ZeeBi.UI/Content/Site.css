@@ -1,68 +1,48 @@
 body
 {
-    font-size: 75%;
-    font-family: Verdana, Tahoma, Arial, "Helvetica Neue", Helvetica, Sans-Serif;
-    color: #232323;
-    background-color: #fff;
+    font-family: "Trebuchet MS", Helvetica, Arial, Sans-Serif;
+    background: white url("/Content/img/background.png") repeat-x;
+    /* background-attachment: scroll; */
 }
 
-/* Styles for basic forms
------------------------------------------------------------*/
-
-fieldset 
+#content
 {
-    border:1px solid #ddd;
-    padding:0 1.4em 1.4em 1.4em;
-    margin:0 0 1.5em 0;
+	width: 960px;
+	margin: 0 auto;
+	text-align: center;
 }
 
-legend 
+h1
 {
-    font-size:1.2em;
-    font-weight: bold;
+	font-family: "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
+	font-size: 36pt;
+	color: white;
+	text-shadow: 2px 2px 2px #26452a, 4px 4px 5px black;
+	margin: 40px 0;
 }
 
-textarea 
+h2
 {
-    min-height: 75px;
+	font-family: "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
+	font-size: 20pt;
+	color: white;
+	text-shadow: 1px 1px #26452a;
+	margin: 20px 0;
 }
 
-.editor-label 
+.box
 {
-    margin: 1em 0 0 0;
+	border: 1px solid black;
+	background-color: #fff9c1;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 5px;
+	margin: 10px;
 }
 
-.editor-field 
+input 
 {
-    margin:0.5em 0 0 0;
-}
-
-
-/* Styles for validation helpers
------------------------------------------------------------*/
-.field-validation-error
-{
-    color: #ff0000;
-}
-
-.field-validation-valid
-{
-    display: none;
-}
-
-.input-validation-error
-{
-    border: 1px solid #ff0000;
-    background-color: #ffeeee;
-}
-
-.validation-summary-errors
-{
-    font-weight: bold;
-    color: #ff0000;
-}
-
-.validation-summary-valid
-{
-    display: none;
+	font-size: inherit;
+	font-family: inherit;
 }

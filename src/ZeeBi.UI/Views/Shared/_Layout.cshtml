@@ -7,7 +7,7 @@
 	<link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
 	<link href="@Url.Content("~/Content/reset.css")" rel="stylesheet" type="text/css" />
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
-	@RenderSection("head", false);
+	@RenderSection("head", false)
 </head>
 
 <script type="text/javascript">
@@ -22,15 +22,25 @@
 
 <body>
 	<div id="content">
+		@if (TempData["Message"] != null)  
+		{
+			<div id="global-message">
+				<span>@TempData["Message"]</span>
+			</div>
+		}
+		
 		<div id="current-user">
 			@if (CurrentUser == null)
 			{
-				<a class="rpxnow" onclick="return false;" href="https://shcil.rpxnow.com/openid/v2/signin?token_url=@Url.Encode(Url.Action("authenticate", "api", null, "http"))"> Sign In </a>
+				var authenticationUrl = Url.Action("Authenticate", "Authentication", new { returnUrl = Request.Url.ToString() }, "http"); 
+				<a class="rpxnow" onclick="return false;" href="https://shcil.rpxnow.com/openid/v2/signin?token_url=@Url.Encode(authenticationUrl)">
+					Sign In with OpenID
+				</a>
 			}
 			else
 			{
 				<span class="username">@CurrentUser.Friendly</span> @:| 
-				<a href="@Url.Action("SignOut", "Api")">Sign Out</a>
+				<a href="@Url.Action("SignOut", "Authentication", new { returnUrl = Request.Url.ToString() })">Sign Out</a>
 			}
 		</div>
 

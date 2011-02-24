@@ -27,6 +27,7 @@ namespace ZeeBi.UI.Controllers
 			var query = Query.EQ("UrlId", id);
 
 			var pageViewCount = DB.PageViews.Count(query);
+
 			return View(new StatsViewModel() {
 				PageViewCount = pageViewCount,
 				Url = url,

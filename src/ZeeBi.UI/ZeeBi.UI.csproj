@@ -76,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ApiController.cs" />
+    <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\DeployController.cs" />
     <Compile Include="Controllers\Responses.cs" />
     <Compile Include="Controllers\StatsController.cs" />

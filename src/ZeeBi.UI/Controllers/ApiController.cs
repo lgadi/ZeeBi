@@ -57,51 +57,6 @@ namespace ZeeBi.UI.Controllers
 			return Json(url,JsonRequestBehavior.AllowGet);
 		}
 
-		public ActionResult SignOut()
-		{
-			this.Response.SetCookie(new HttpCookie("userId"));
-			return RedirectToAction("index");
-		}
-
-		public ActionResult Authenticate(string token)
-		{
-			if (!string.IsNullOrEmpty(token))
-			{
-				var rpx = new Rpx("87df721ebccbde5919f4258b45d8f3d0dc1db546",
-					"https://shcil.rpxnow.com/");
-				var response = rpx.AuthInfo(token);
-
-				var parser = new RpxResponseParser(response);
-
-				if (parser.Status == RpxReponseStatus.Ok)
-				{
-					var responseUser = parser.BuildUser();
-					User user = DB.Users.FindOne(Query.EQ("OpenId", responseUser.OpenId));
-					if (user == null)
-					{
-						user = new User
-						      {
-						                		Email = responseUser.Email,
-												Friendly = responseUser.Friendly,
-												OpenId = responseUser.OpenId,
-												UserName = responseUser.UserName
-						                	 		
-						       	};
-						DB.Users.Insert(user);
-					}
-
-					Response.AppendCookie(new HttpCookie("userId", user.Id.ToString()));
-					
-					return RedirectToAction("index");
-				}
-			}
-
-			ViewBag.Message = "There was a problem signing you in."
-				+ "Verify your credentials and try again.";
-
-			return RedirectToAction("index");
-		}
-
 		public class CreateRequest
 		{
 			public string LongUrl { get; set; }

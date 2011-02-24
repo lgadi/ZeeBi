@@ -34,19 +34,41 @@ body
 /* Header */
 
 #current-user {
-    background: none repeat scroll 0 0 #2128FF;
-    border: 1px solid gray;
-    border-radius: 5px 5px 5px 5px;
+    background-color: #2128FF;
+    border: 1px solid #ddf;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
     color: white;
     float: right;
     padding: 5px;
     position: relative;
-    top: -20px;
+    top: -10px;
 }
 
-#current-user a, #current-user a:visited { color: #FFA968; }
+#current-user a, #current-user a:visited { color: #FFA968; text-decoration: none; }
 
 #current-user .username { font-weight: bold; }
+
+#global-message
+{
+    position: absolute;
+    top: 0;
+	left: 0;
+	width: 100%;
+}
+
+#global-message span
+{
+	background-color: #FFF9C1;
+    border: 1px solid gray;
+    border-radius: 0 0 5px 5px;
+    -moz-border-radius: 0 0 5px 5px;
+    -webkit-border-radius: 0 0 5px 5px;
+    color: red;
+    margin: 0 auto;
+    padding: 5px 20px;
+}
 
 h1
 {

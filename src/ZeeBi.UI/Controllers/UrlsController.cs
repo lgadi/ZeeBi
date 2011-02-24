@@ -47,12 +47,6 @@ namespace ZeeBi.UI.Controllers
 				ViewedAt = DateTime.Now
 			});
 			
-			var query = new QueryDocument("_id", url.Id);
-			var update = new UpdateDocument
-			             	{
-			             		{"$inc", new BsonDocument ("ClickCount", "1")}
-
-			             	};
 			DB.Urls.Update(Query.EQ("_id", url.Id), Update.Inc("ClickCount",1));
 			
 		}

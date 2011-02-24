@@ -2,7 +2,6 @@
 		   
 @{
     ViewBag.Title = "Zee.Bi";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Zee.Bi</h1>
@@ -59,8 +58,8 @@
 	</div>
 </form>
 
-<script type="text/javascript" src="../../Scripts/jquery-1.5.min.js"></script>
-<script type="text/javascript" src="../../Scripts/jquery.hint.js"></script>
+<script type="text/javascript" src="@Url.Content("Scripts/lib/jquery-1.5.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("Scripts/lib/jquery.hint.js")"></script>
 
 <script type="text/javascript">
 

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Linq.Expressions;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 using ZeeBi.UI.Controllers;
 
@@ -24,7 +22,7 @@ namespace ZeeBi.UI
 
 			routes.MapRoute("Home", "", new { controller = Name<UrlsController>(), action = "Index" });
 
-			routes.MapRoute("API", "api/v1/{method}", new {controller = Name<ApiController>(), action = "Index" , method = UrlParameter.Optional });
+			routes.MapRoute("API", "api/v1/{method}", new { controller = Name<ApiController>(), action = "Index" , method = UrlParameter.Optional });
 		
 			routes.MapRoute("Default", "-/{controller}/{action}/{id}", new { id = UrlParameter.Optional });
 			

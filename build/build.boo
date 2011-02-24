@@ -5,7 +5,7 @@ import System.IO
 
 projectName = "ZeeBi.UI"
 
-repo as Repository
+#repo as Repository
 version as string
 srcRoot = "..\\src\\"
 slnFile = Path.Combine(srcRoot, "${projectName}.sln");

@@ -10,6 +10,8 @@ namespace ZeeBi.UI.Models
 		public string LongUrl { get; set; }
 
 		public DateTime Created { get; set; }
+
+		public int ClickCount { get; set; }
 	}
 
 	public class PageView

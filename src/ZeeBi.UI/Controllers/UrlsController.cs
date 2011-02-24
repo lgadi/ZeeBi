@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Web.Mvc;
+using MongoDB.Bson;
 using MongoDB.Driver;
+using MongoDB.Driver.Builders;
 using ZeeBi.UI.DataAccess;
 using ZeeBi.UI.Models;
 using ZeeBi.UI.Services;
@@ -29,7 +31,7 @@ namespace ZeeBi.UI.Controllers
 			var url = DB.Urls.FindOneById(id);
 			if (url == null)
 				return Responses.NotFound;
-
+			Console.WriteLine(id);
 			RecordAnalytics(url);
 
 			return new RedirectResult(url.LongUrl, false);
@@ -37,13 +39,22 @@ namespace ZeeBi.UI.Controllers
 
 		private void RecordAnalytics(Url url)
 		{
-
+			
 			DB.PageViews.Insert(new PageView() {
 				UrlId = url.Id,
 				UserAgent = Request.UserAgent,
 				UserIp = Request.UserHostAddress,
 				ViewedAt = DateTime.Now
 			});
+			
+			var query = new QueryDocument("_id", url.Id);
+			var update = new UpdateDocument
+			             	{
+			             		{"$inc", new BsonDocument ("ClickCount", "1")}
+
+			             	};
+			DB.Urls.Update(Query.EQ("_id", url.Id), Update.Inc("ClickCount",1));
+			
 		}
 
 		[HttpPost]
@@ -77,6 +88,7 @@ namespace ZeeBi.UI.Controllers
 			url.LongUrl = new UrlNormalizer().Normalize(url.LongUrl);
 			if (url.LongUrl == null) throw new InvalidUrlException(url.LongUrl);
 			url.Created = DateTime.Now;
+			url.ClickCount = 0;
 
 			DB.Urls.Insert(url, SafeMode.FSyncTrue);
 		}

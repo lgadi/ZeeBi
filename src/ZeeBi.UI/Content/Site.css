@@ -14,8 +14,8 @@ body
 
 h1
 {
-	font-family: "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
-	font-size: 36pt;
+	font-family: "Luckiest Guy", "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
+	font-size: 28pt;
 	color: white;
 	text-shadow: 2px 2px 2px #26452a, 4px 4px 5px black;
 	margin: 40px 0;
@@ -23,8 +23,8 @@ h1
 
 h2
 {
-	font-family: "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
-	font-size: 20pt;
+	font-family: "Yanone Kaffeesatz", "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
+	font-size: 30pt;
 	color: white;
 	text-shadow: 1px 1px #26452a;
 	margin: 20px 0;

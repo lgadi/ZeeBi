@@ -1,7 +1,7 @@
 ﻿@model ZeeBi.UI.ViewModels.Stats.StatsViewModel
 @using ZeeBi.UI.Views;
 @{
-	ViewBag.Title = "Details for @Model.Url.Id";
+	ViewBag.Title = "URL Info";
 	var shortUrl = Url.RouteUrl("Follow", new { id = Model.Url.Id }, "http");
 }
 
@@ -14,6 +14,7 @@
 		border-radius: 5px;
 		-moz-border-radius: 5px;
 		-webkit-border-radius: 5px;
+		margin: 5px 80px 5px 10px;
 	}
 	
 	.stat-field 
@@ -22,9 +23,38 @@
 		text-align: left;
 		margin: 10px auto;
 	}
+	
+	.box 
+	{
+		min-height: 110px; 
+	}
+	
+	table
+	{
+		border: 1px solid gray;		
+	}
+	
+	table thead
+	{
+		font-weight: bold;
+		background-color: black;
+		color: White;
+	}
+	
+	table td { padding: 2px; }
+	
+	table td.pageviews-cell { width: 100px; }
+	
+	table tr { border: 1px solid gray; }
+	
+	table tr.summary 
+	{
+		font-weight: bold;
+	}
+	
 </style>
 
-<h2>Info for @shortUrl</h2>
+<h2>Info for <a href="@shortUrl">@shortUrl</a></h2>
 
 <div class="box">
 	<div id="qrcode-container">
@@ -36,9 +66,6 @@
 	</div>
 
 	<div class="stat-field">
-	Total page views: @Model.PageViewCount <br />
-
-	<div class="stat-field">
 		<div class="table">
 			@if (Model.PageViewCount == 0) {
 				<text>Once you get some page views, we will break them down for you.</text>
@@ -46,18 +73,22 @@
 				<table>
 					<thead>
 						<tr>
-							<td>UserAgent</td>
-							<td>Count</td>
+							<td class="useragent-cell">User Agent</td>
+							<td class="pageviews-cell">Page Views</td>
 						</tr>
 					</thead>
 					<tbody>
 					@foreach (var kvp in Model.PageViewsByUserAgent)
 					{
 						<tr>
-						<td>@kvp.Key</td>
-						<td>@kvp.Value</td>
+						<td class="useragent-cell">@kvp.Key</td>
+						<td class="pageviews-cell">@kvp.Value</td>
 						</tr>
 					}
+					<tr class="summary">
+						<td class="useragent-cell">Total</td>
+						<td class="pageviews-cell">@Model.PageViewCount</td>
+					</tr>
 					</tbody>
 				</table>
 			}

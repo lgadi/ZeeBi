@@ -77,7 +77,7 @@ namespace ZeeBi.UI.Controllers
 							ErrorDialog = false,
 						};
 						startInfo.EnvironmentVariables.Add("GIT_COMMIT_HEAD", head);
-						startInfo.EnvironmentVariables.Add("GIT_COMMITS", head);
+						startInfo.EnvironmentVariables.Add("GIT_COMMITS", commits);
 						var p = Process.Start(startInfo);
 						p.OutputDataReceived += (proc, data) => output.AppendLine(data.Data);
 						p.BeginOutputReadLine();

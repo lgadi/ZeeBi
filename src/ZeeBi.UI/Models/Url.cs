@@ -12,6 +12,8 @@ namespace ZeeBi.UI.Models
 		public DateTime Created { get; set; }
 
 		public int ClickCount { get; set; }
+
+		public ObjectId UserId { get; set; }
 	}
 
 	public class PageView

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using MongoDB.Bson;
 using ZeeBi.UI.Models;
 using ZeeBi.UI.Services;
 
@@ -40,7 +41,9 @@ namespace ZeeBi.UI.Controllers
 		{
 			try
 			{
-				_urlsRespository.AddUrl(url.LongUrl, url.Id);
+				var user = ViewData["currentUser"] as User;
+				var userId = user == null ? ObjectId.Empty : user.Id;
+				_urlsRespository.AddUrl(url.LongUrl, url.Id, userId);
 			}
 			catch (IdAlreadyTakenException)
 			{

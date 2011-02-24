@@ -1,5 +1,6 @@
 using System;
 using System.Web;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using ZeeBi.UI.Controllers;
@@ -15,13 +16,13 @@ namespace ZeeBi.UI.Services
 		{
 			_idGenerator = new IdGenerator();
 		}
-		public Url AddUrl(string longUrl, string id = null)
+		public Url AddUrl(string longUrl, string id = null, ObjectId userId = default(ObjectId))
 		{
-			var url = new Url
-			          	{
-			          		LongUrl = longUrl,
-			          		Id = id
-			          	};
+			var url = new Url {
+				LongUrl = longUrl,
+				Id = id,
+				UserId = userId
+			};
 			
 			if (url.Id == null)
 			{

@@ -19,7 +19,6 @@
 	form label 
 	{
 		display: inline-block;
-		width: 395px;
 		text-align: right;
 		padding-right: 3px;
 	}
@@ -82,7 +81,7 @@
 		$('#id, #longUrl').hint();
 		$('#id').bind('change keyup', function () {
 			$('#id-messages span').hide();
-			
+
 			if (this.value.length == 0) return;
 
 			if (this.value.length < 5) {
@@ -90,7 +89,7 @@
 				return;
 			}
 
-			$.getJSON('@Url.Action("isAvailable")', { "id" : this.value }, function (isAvailable) {
+			$.getJSON('@Url.Action("isAvailable")', { "id": this.value }, function (isAvailable) {
 				if (isAvailable) {
 					$('#id-ok').show();
 				} else {
@@ -105,7 +104,7 @@
 
 			if (this.value.length == 0) return;
 
-			$.getJSON('@Url.Action("isUrlValid")', { "url" : this.value }, function(valid) {
+			$.getJSON('@Url.Action("isUrlValid")', { "url": this.value }, function (valid) {
 				if (!valid) {
 					$('#longUrl-invalid').show();
 				}

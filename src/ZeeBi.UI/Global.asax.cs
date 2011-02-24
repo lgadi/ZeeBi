@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
 using ZeeBi.UI.Controllers;
+using ZeeBi.UI.Filters;
 
 namespace ZeeBi.UI
 {
@@ -9,6 +10,7 @@ namespace ZeeBi.UI
 		public static void RegisterGlobalFilters(GlobalFilterCollection filters)
 		{
 			filters.Add(new HandleErrorAttribute());
+			filters.Add(new AuthenticationFilter());
 		}
 
 		private static string Name<T>()

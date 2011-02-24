@@ -4,12 +4,30 @@
     ViewBag.Title = "URL Shortened!";
 }
 
+<style>
+	.box div 
+	{
+		margin: 10px 0;
+	}
+	
+	#repeat-container 
+	{
+		margin-top: 25px;
+	}
+</style>
+
 <h2>URL Shortened!</h2>
 
 <div class="box">
-	<div>Your short url is <a href="/@Model.Id">@Url.RouteUrl("Follow", new { id = Model.Id }, "http")</a></div>
+	<div id="short-url-container">
+		Your short URL is <a href="/@Model.Id">@Url.RouteUrl("Follow", new { id = Model.Id }, "http")</a>.
+	</div>
+	
+	<div id="info-container">
+		Track how users follow your URL at its <a href="@Url.Action("info", "stats", new { id = Model.Id })">info page</a>.
+	</div>
 
-<div>
-	Or you can click here for <a href="@Url.Action("info", "stats", new { id = Model.Id })">details</a>
-</div>
+	<div id="repeat-container">
+		<a href="/"><button>Ooh ooh let's do another one!</button></a>
+	</div>
 </div>

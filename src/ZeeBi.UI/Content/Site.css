@@ -12,6 +12,22 @@ body
 	text-align: center;
 }
 
+a 
+{
+	text-decoration: underline;
+	color: #26452a;
+}
+
+a:visited
+{
+	color: #26452a;
+}
+
+a:hover
+{
+	color: #FF3D23;
+}
+
 h1
 {
 	font-family: "Luckiest Guy", "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
@@ -19,6 +35,12 @@ h1
 	color: white;
 	text-shadow: 2px 2px 2px #26452a, 4px 4px 5px black;
 	margin: 40px 0;
+}
+
+h1 a, h1 a:hover, h1 a:visited 
+{
+	color: inherit;
+	text-decoration: inherit;
 }
 
 h2
@@ -30,13 +52,25 @@ h2
 	margin: 20px 0;
 }
 
+h2 a, h2 a:visited
+{
+	color: inherit;
+	text-decoration: none;
+}
+
+h2 a:hover
+{
+	color: #efe;
+	text-decoration: underline;
+}
+
 .box
 {
-	border: 1px solid black;
+	border: 1px solid gray;
 	background-color: #fff9c1;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+	border-radius: 15px;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
 	padding: 5px;
 	margin: 10px;
 }
@@ -45,4 +79,34 @@ input
 {
 	font-size: inherit;
 	font-family: inherit;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	padding: 1px 3px;
 }
+
+button, .button
+{
+		border: 1px solid gray;
+		background-color: #e66800;
+		border-radius: 5px;
+		-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+		color: white;
+		font-size: 16pt;
+		background-image: -webkit-gradient(
+			linear,
+			left top,
+			left bottom,
+			color-stop(0.25, rgb(250,162,85)),
+			color-stop(0.75, rgb(230,104,0))
+		);
+		background-image: -moz-linear-gradient(
+			center top,
+			rgb(250,162,85) 25%,
+			rgb(230,104,0) 75%
+		);
+}
+
+

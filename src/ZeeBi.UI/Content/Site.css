@@ -12,21 +12,41 @@ body
 	text-align: center;
 }
 
-a 
+/* Default Colors */
+
+.box a 
 {
 	text-decoration: underline;
 	color: #26452a;
 }
 
-a:visited
+.box a:visited
 {
 	color: #26452a;
 }
 
-a:hover
+.box a:hover
 {
 	color: #FF3D23;
 }
+
+
+/* Header */
+
+#current-user {
+    background: none repeat scroll 0 0 #2128FF;
+    border: 1px solid gray;
+    border-radius: 5px 5px 5px 5px;
+    color: white;
+    float: right;
+    padding: 5px;
+    position: relative;
+    top: -20px;
+}
+
+#current-user a, #current-user a:visited { color: #FFA968; }
+
+#current-user .username { font-weight: bold; }
 
 h1
 {
@@ -63,6 +83,8 @@ h2 a:hover
 	color: #efe;
 	text-decoration: underline;
 }
+
+/* Common Elements */ 
 
 .box
 {
@@ -120,7 +142,7 @@ table thead
 	color: black;
 }
 	
-table td { padding: 2px; }
+table td, table th { padding: 2px; }
 	
 table tr { border: 1px solid gray; }
 	
@@ -128,4 +150,3 @@ table tr.summary
 {
 	font-weight: bold;
 }
-

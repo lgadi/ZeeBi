@@ -1,7 +1,6 @@
 using System.Web;
 using System.Web.Mvc;
 using MongoDB.Bson;
-using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using ZeeBi.UI.DataAccess;
 using ZeeBi.UI.Models;

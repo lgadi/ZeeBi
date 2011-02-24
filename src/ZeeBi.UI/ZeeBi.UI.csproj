@@ -95,9 +95,11 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\UsersRepository.cs" />
     <Compile Include="ViewModels\Stats\StatsViewModel.cs" />
+    <Compile Include="ViewModels\Urls\HomeViewModel.cs" />
     <Compile Include="Views\WebViewPage.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\home.css" />
     <Content Include="Content\img\background.png" />
     <Content Include="Content\reset.css" />
     <Content Include="Global.asax" />
@@ -119,7 +121,9 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Views\Urls\UserUrls.cshtml" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Urls\Index.cshtml" />
   </ItemGroup>

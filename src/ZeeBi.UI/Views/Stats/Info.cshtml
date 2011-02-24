@@ -27,30 +27,9 @@
 	.box 
 	{
 		min-height: 110px; 
-	}
-	
-	table
-	{
-		border: 1px solid gray;		
-	}
-	
-	table thead
-	{
-		background-color: #faa255;
-		color: black;
-	}
-	
-	table td { padding: 2px; }
-	
-	table td.pageviews-cell { width: 100px; }
-	table td.useragent-cell { width: 400px; }
-	
-	table tr { border: 1px solid gray; }
-	
-	table tr.summary 
-	{
-		font-weight: bold;
-	}
+	}	
+	table .pageviews-cell { width: 100px; }
+	table .useragent-cell { width: 400px; }
 	
 </style>
 
@@ -70,8 +49,8 @@
 			<table>
 				<thead>
 					<tr>
-						<td class="useragent-cell">User Agent</td>
-						<td class="pageviews-cell">Page Views</td>
+						<th class="useragent-cell">User Agent</th>
+						<th class="pageviews-cell">Page Views</th>
 					</tr>
 				</thead>
 				<tbody>

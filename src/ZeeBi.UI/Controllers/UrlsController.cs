@@ -3,6 +3,7 @@ using System.Web.Mvc;
 using MongoDB.Bson;
 using ZeeBi.UI.Models;
 using ZeeBi.UI.Services;
+using ZeeBi.UI.ViewModels.Urls;
 
 namespace ZeeBi.UI.Controllers
 {
@@ -20,12 +21,22 @@ namespace ZeeBi.UI.Controllers
 
 		public ActionResult Index()
 		{
-			return View();
+			var model = new HomeViewModel();
+			if (CurrentUser != null)
+			{
+				model.MyUrls = _urlsRespository.FindByUser(CurrentUser.Id);
+			}
+			return View(model);
+		}
+
+		protected User CurrentUser
+		{
+			get { return ViewData["currentUser"] as User; }
 		}
 
 		public ActionResult Follow(string id)
 		{
-			var url = _urlsRespository.FindOneById(id);
+			var url = _urlsRespository.FindById(id);
 			if (url == null)
 				return Responses.NotFound;
 			Console.WriteLine(id);
@@ -43,7 +54,7 @@ namespace ZeeBi.UI.Controllers
 			{
 				var user = ViewData["currentUser"] as User;
 				var userId = user == null ? ObjectId.Empty : user.Id;
-				_urlsRespository.AddUrl(url.LongUrl, url.Id, userId);
+				_urlsRespository.Add(url.LongUrl, url.Id, userId);
 			}
 			catch (IdAlreadyTakenException)
 			{
@@ -57,7 +68,7 @@ namespace ZeeBi.UI.Controllers
 		[HttpGet]
 		public ActionResult Created(string id)
 		{
-			var url = _urlsRespository.FindOneById(id);
+			var url = _urlsRespository.FindById(id);
 			if (url == null)
 				return Responses.NotFound;
 

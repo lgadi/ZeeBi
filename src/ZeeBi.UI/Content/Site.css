@@ -109,4 +109,23 @@ button, .button
 		);
 }
 
+table
+{
+	border: 1px solid gray;		
+}
+	
+table thead
+{
+	background-color: #faa255;
+	color: black;
+}
+	
+table td { padding: 2px; }
+	
+table tr { border: 1px solid gray; }
+	
+table tr.summary 
+{
+	font-weight: bold;
+}
 

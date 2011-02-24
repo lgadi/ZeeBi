@@ -41,7 +41,7 @@ namespace ZeeBi.UI.Controllers
 		[HttpPost]
 		public JsonResult Create(CreateRequest createRequest)
 		{
-			var target = _urlsRespository.AddUrl(createRequest.LongUrl);
+			var target = _urlsRespository.Add(createRequest.LongUrl);
 
 			return Json(target);
 		}
@@ -49,7 +49,7 @@ namespace ZeeBi.UI.Controllers
 		[HttpGet]
 		public ActionResult Get(string id)
 		{
-			var url = _urlsRespository.FindOneById(id);
+			var url = _urlsRespository.FindById(id);
 			if (url == null)
 			{
 				return new HttpNotFoundResult("Could not find matching record for " + id);

@@ -1,0 +1,52 @@
+﻿/* New URL form */
+
+.messages { width: 600px; min-height: 16px; padding: 2px; text-align: right; }
+.messages span { display:none; color:Green;}
+	
+.form-field 
+{
+	margin: 10px auto;
+	width: 620px; 
+}
+	
+.form-actions
+{
+	margin: 25px 0 10px;
+}
+	
+form label 
+{
+	display: inline-block;
+	text-align: right;
+	padding-right: 3px;
+}
+	
+#longUrl
+{
+	width : 600px;
+}
+	
+#id { width : 200px; }
+	
+#submit 
+{
+	width: 200px;
+}
+
+form input.blur
+{
+	color : #bbb;
+}
+	
+.messages .error 
+{
+	color:Red;
+}
+
+/* URLs table */
+
+#my-urls { width: 90%; margin: 5px auto; }
+#my-urls th#short-url-header { width: 20%; }
+#my-urls th#long-url-header { width: 50%; }
+#my-urls th#created-header { width: 20%; }
+#my-urls th#page-views-header { width: 10%; }

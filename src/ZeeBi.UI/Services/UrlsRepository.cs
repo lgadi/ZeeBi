@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web;
 using MongoDB.Bson;
 using MongoDB.Driver;
@@ -12,11 +14,13 @@ namespace ZeeBi.UI.Services
 	public class UrlsRepository
 	{
 		private readonly IdGenerator _idGenerator;
+
 		public UrlsRepository()
 		{
 			_idGenerator = new IdGenerator();
 		}
-		public Url AddUrl(string longUrl, string id = null, ObjectId userId = default(ObjectId))
+
+		public Url Add(string longUrl, string id = null, ObjectId userId = default(ObjectId))
 		{
 			var url = new Url {
 				LongUrl = longUrl,
@@ -65,9 +69,14 @@ namespace ZeeBi.UI.Services
 			return !_idGenerator.IsTaken(id);
 		}
 
-		public Url FindOneById(string id)
+		public Url FindById(string id)
 		{
 			return DB.Urls.FindOneById(id);
+		}
+
+		public IList<Url> FindByUser(ObjectId userId)
+		{
+			return DB.Urls.Find(Query.EQ("UserId", userId)).SetSortOrder(SortBy.Descending("Created")).ToList();
 		}
 	}
 }

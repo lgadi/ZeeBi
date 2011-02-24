@@ -1,50 +1,8 @@
-﻿@model ZeeBi.UI.Models.Url
-		   
-<style type="text/css">
-	
-	.messages { width: 600px; min-height: 16px; padding: 2px; text-align: right; }
-	.messages span { display:none; color:Green;}
-	
-	.form-field 
-	{
-		margin: 10px auto;
-		width: 620px; 
-	}
-	
-	.form-actions
-	{
-		margin: 25px 0 10px;
-	}
-	
-	form label 
-	{
-		display: inline-block;
-		text-align: right;
-		padding-right: 3px;
-	}
-	
-	#longUrl
-	{
-		width : 600px;
-	}
-	
-	#id { width : 200px; }
-	
-	#submit 
-	{
-		width: 200px;
-	}
+﻿@model ZeeBi.UI.ViewModels.Urls.HomeViewModel
 
-	form input.blur
-	{
-		color : #bbb;
-	}
-	
-	.messages .error 
-	{
-		color:Red;
-	}
-</style>
+@section head {
+	<link href="@Url.Content("~/Content/home.css")" rel="stylesheet" type="text/css" />
+}
 
 <h2>Shorten a URL!</h2>
 
@@ -71,6 +29,14 @@
 		</div>
 	</form>
 </div>
+
+@if (Model.MyUrls != null) 
+{
+	<h2>My URLs</h2>
+	<div id="my-urls-container" class="box">
+		@Html.Partial("UserUrls", Model.MyUrls)
+	</div>
+}
 
 <script type="text/javascript" src="@Url.Content("Scripts/lib/jquery-1.5.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("Scripts/lib/jquery.hint.js")"></script>

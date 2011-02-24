@@ -23,6 +23,8 @@ namespace ZeeBi.UI
 			routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 			routes.MapRoute("Home", "", new { controller = Name<UrlsController>(), action = "Index" });
+
+			routes.MapRoute("API", "api/v1/{method}", new {controller = Name<ApiController>(), action = "Index" , method = UrlParameter.Optional });
 		
 			routes.MapRoute("Default", "-/{controller}/{action}/{id}", new { id = UrlParameter.Optional });
 			

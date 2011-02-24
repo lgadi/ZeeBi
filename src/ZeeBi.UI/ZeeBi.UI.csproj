@@ -33,6 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\..\lib\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="MongoDB.Bson">
       <HintPath>..\..\lib\MongoDB.Bson.dll</HintPath>
     </Reference>
@@ -73,6 +76,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\ApiController.cs" />
+    <Compile Include="Controllers\DeployController.cs" />
     <Compile Include="Controllers\Responses.cs" />
     <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\UrlsController.cs" />

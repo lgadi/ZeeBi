@@ -21,14 +21,18 @@
 
 <body>
 	<div id="content">
-		@if (CurrentUser == null)
-		{
-			<a class="rpxnow" onclick="return false;" href="https://shcil.rpxnow.com/openid/v2/signin?token_url=@Url.Encode(Url.Action("authenticate", "api", null, "http"))"> Sign In </a>
-		}
-		else
-		{
-			@CurrentUser.Friendly
-		}
+		<div id="current-user">
+			@if (CurrentUser == null)
+			{
+				<a class="rpxnow" onclick="return false;" href="https://shcil.rpxnow.com/openid/v2/signin?token_url=@Url.Encode(Url.Action("authenticate", "api", null, "http"))"> Sign In </a>
+			}
+			else
+			{
+				@CurrentUser.Friendly 
+				<a href="@Url.Action("SignOut", "Api")">Sign Out</a>
+			}
+		</div>
+
 		<div id="header">
 			<h1><a href="/">extremelylongurlshorteningserviceprovider.info</a></h1>
 		</div>

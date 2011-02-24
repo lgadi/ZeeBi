@@ -23,7 +23,8 @@ def writeBuildInfo:
 	lines = ["Build info:","===================="]
 	lines.Add(" at: " + System.DateTime.UtcNow)
 	lines.Add(" branch: master")
-	lines.Add(" commit: " + System.Environment.GetEnvironmentVariable('GIT_COMMIT_HEAD'))
+	lines.Add(" head: " + System.Environment.GetEnvironmentVariable('GIT_COMMIT_HEAD'))
+	lines.Add(" commits: " + System.Environment.GetEnvironmentVariable('GIT_COMMITS'))
 	
 	File.WriteAllLines(sourceOutFilename, array(string, lines))
 

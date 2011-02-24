@@ -12,8 +12,6 @@ namespace ZeeBi.UI.Controllers
 {
 	public class DeployController : Controller
 	{
-		//[HttpPost]
-		[HttpGet]
 		public ActionResult Deploy(string payload)
 		{
 

@@ -40,7 +40,7 @@ namespace ZeeBi.UI.Controllers
 		{
 			try
 			{
-				_urlsRespository.AddUrl(url);
+				_urlsRespository.AddUrl(url.LongUrl, url.Id);
 			}
 			catch (IdAlreadyTakenException)
 			{

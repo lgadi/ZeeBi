@@ -15,8 +15,14 @@ namespace ZeeBi.UI.Services
 		{
 			_idGenerator = new IdGenerator();
 		}
-		public void AddUrl(Url url)
+		public Url AddUrl(string longUrl, string id = null)
 		{
+			var url = new Url
+			          	{
+			          		LongUrl = longUrl,
+			          		Id = id
+			          	};
+			
 			if (url.Id == null)
 			{
 				url.Id = _idGenerator.Generate();
@@ -35,6 +41,7 @@ namespace ZeeBi.UI.Services
 			url.ClickCount = 0;
 
 			DB.Urls.Insert(url, SafeMode.FSyncTrue);
+			return url;
 		}
 
 		public void RecordAnalytics(Url url, HttpRequestBase request)

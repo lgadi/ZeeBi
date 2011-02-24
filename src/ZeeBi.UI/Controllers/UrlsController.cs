@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Web.Mvc;
-using MongoDB.Bson;
-using MongoDB.Driver;
-using MongoDB.Driver.Builders;
-using ZeeBi.UI.DataAccess;
 using ZeeBi.UI.Models;
 using ZeeBi.UI.Services;
 
@@ -11,14 +7,14 @@ namespace ZeeBi.UI.Controllers
 {
 	public class UrlsController : Controller
 	{
-		private readonly IdGenerator _idGenerator;
 		private readonly UrlNormalizer _urlNormalizer;
+		private readonly UrlsRepository _urlsRespository;
 
 		public UrlsController()
 		{
 			// todo IOC?
-			_idGenerator = new IdGenerator(); 
 			_urlNormalizer = new UrlNormalizer();
+			_urlsRespository = new UrlsRepository();
 		}
 
 		public ActionResult Index()
@@ -28,35 +24,23 @@ namespace ZeeBi.UI.Controllers
 
 		public ActionResult Follow(string id)
 		{
-			var url = DB.Urls.FindOneById(id);
+			var url = _urlsRespository.FindOneById(id);
 			if (url == null)
 				return Responses.NotFound;
 			Console.WriteLine(id);
-			RecordAnalytics(url);
+			_urlsRespository.RecordAnalytics(url, Request);
 
 			return new RedirectResult(url.LongUrl, false);
 		}
 
-		private void RecordAnalytics(Url url)
-		{
-			
-			DB.PageViews.Insert(new PageView() {
-				UrlId = url.Id,
-				UserAgent = Request.UserAgent,
-				UserIp = Request.UserHostAddress,
-				ViewedAt = DateTime.Now
-			});
-			
-			DB.Urls.Update(Query.EQ("_id", url.Id), Update.Inc("ClickCount",1));
-			
-		}
+	
 
 		[HttpPost]
 		public ActionResult Add(Url url)
 		{
 			try
 			{
-				AddUrl(url);
+				_urlsRespository.AddUrl(url.LongUrl, url.Id);
 			}
 			catch (IdAlreadyTakenException)
 			{
@@ -65,32 +49,12 @@ namespace ZeeBi.UI.Controllers
 			return RedirectToAction("created", new { id = url.Id });
 		}
 
-		private void AddUrl(Url url)
-		{
-			if (url.Id == null)
-			{
-				url.Id = _idGenerator.Generate();
-			}
-			else
-			{
-				if (_idGenerator.IsTaken(url.Id))
-				{
-					throw new IdAlreadyTakenException(url.Id);
-				}
-			}
-
-			url.LongUrl = new UrlNormalizer().Normalize(url.LongUrl);
-			if (url.LongUrl == null) throw new InvalidUrlException(url.LongUrl);
-			url.Created = DateTime.Now;
-			url.ClickCount = 0;
-
-			DB.Urls.Insert(url, SafeMode.FSyncTrue);
-		}
+		
 
 		[HttpGet]
 		public ActionResult Created(string id)
 		{
-			var url = DB.Urls.FindOneById(id);
+			var url = _urlsRespository.FindOneById(id);
 			if (url == null)
 				return Responses.NotFound;
 
@@ -101,7 +65,7 @@ namespace ZeeBi.UI.Controllers
 		[HttpGet]
 		public ActionResult IsAvailable(string id)
 		{
-			var available = !_idGenerator.IsTaken(id);
+			var available = _urlsRespository.IsAvailable(id);
 			return Json(available, JsonRequestBehavior.AllowGet);
 		}
 

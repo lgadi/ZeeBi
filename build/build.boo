@@ -87,7 +87,7 @@ target package:
 desc "deploy to the dojo server"
 target deploy:
 	source = outDir;
-	dest = "\\\\dojo1.semingo.local\\c$\\ZeeBi\\website"
+	dest = "C:\\ZeeBi\\website"
 	print "copying from ${source} to ${dest}"
 	
 	for dirPath in Directory.GetDirectories(dest, "*"):

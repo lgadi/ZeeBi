@@ -46,20 +46,20 @@ namespace ZeeBi.UI.Controllers
 
 		private Dictionary<DateTime, int> GetPageViewsByDate(IMongoQuery query)
 		{
-			//TODO: Why is that not working???
-			var map = new BsonJavaScript("function() {"+ 
-											"day = Date.UTC(this.ViewedAt.getFullYear(), this.ViewedAt.getMonth(), this.ViewedAt.getDate());"+
-											"emit({day: day, daynum: this.ViewedAt.getDate()}, {count: 1});"+
-										 "}");
+			var map = new BsonJavaScript(
+@"function() { 
+	day = Date.UTC(this.ViewedAt.getFullYear(), this.ViewedAt.getMonth(), this.ViewedAt.getDate());
+	emit({day: day, daynum: this.ViewedAt.getDate()}, {count: 1});
+}");
 
-			var reduce = new BsonJavaScript("function(key, values) {" +
-												"var count = 0;" +
-												"values.forEach(function(v) {" +
-													"count += v['count'];" +
-												"}" +
-												");" +
-												"return {count: count};" +
-			                                "}");
+			var reduce = new BsonJavaScript(
+@"function(key, values) {
+	var count = 0;
+	values.forEach(function(v) {
+		count += v['count'];
+	});
+	return {count: count};
+}");
 
 			var results = DB.PageViews.MapReduce(query, map, reduce, MapReduceOptions.SetOutput(MapReduceOutput.Inline)).InlineResults.ToList();
 			return results.ToDictionary(

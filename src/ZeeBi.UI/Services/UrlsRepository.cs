@@ -57,13 +57,29 @@ namespace ZeeBi.UI.Services
 			DB.PageViews.Insert(new PageView
 			                    	{
 				UrlId = url.Id,
-				UserAgent = request.UserAgent,
+				UserAgent = TransformUserAgent(request.UserAgent),
 				UserIp = request.UserHostAddress,
 				ViewedAt = DateTime.Now
 			});
 
 			DB.Urls.Update(Query.EQ("_id", url.Id), Update.Inc("ClickCount", 1));
 
+		}
+
+		private string TransformUserAgent(string userAgent)
+		{
+			string transformedUserAgent = "other";
+
+			if (userAgent.Contains("Chrome")) transformedUserAgent = "Chrome";
+			if (userAgent.Contains("MSIE")) transformedUserAgent = "Internet Explorer";
+			if (userAgent.Contains("Firefox")) transformedUserAgent = "Firefox";
+			if (userAgent.Contains("Opera")) transformedUserAgent = "Opera";
+			if (userAgent.Contains("Links")) transformedUserAgent = "Links";
+			if (userAgent.Contains("BlackBerry")) transformedUserAgent = "BlackBerry";
+			if (userAgent.Contains("IEMobile")) transformedUserAgent = "Mobile IE";
+			if (userAgent.Contains("iPhone")) transformedUserAgent = "iPhone";
+
+			return transformedUserAgent;
 		}
 
 		public bool IsAvailable(string id)

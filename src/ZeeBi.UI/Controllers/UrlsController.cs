@@ -26,6 +26,9 @@ namespace ZeeBi.UI.Controllers
 			{
 				model.MyUrls = _urlsRespository.FindByUser(CurrentUser.Id);
 			}
+
+			model.LongUrl = TempData["Input.LongUrl"] as string;
+			model.Id = TempData["Input.Id"] as string;
 			return View(model);
 		}
 
@@ -63,6 +66,8 @@ namespace ZeeBi.UI.Controllers
 			catch (InvalidUrlException)
 			{
 				TempData["Message"] = "This seems like an invalid URL. Wanna try again?";
+				TempData["Input.LongUrl"] = longUrl;
+				TempData["Input.Id"] = id;
 				return RedirectToAction("Index");
 			}
 		}

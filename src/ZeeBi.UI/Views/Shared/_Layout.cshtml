@@ -34,7 +34,7 @@
 			{
 				var authenticationUrl = Url.Action("Authenticate", "Authentication", new { returnUrl = Request.Url.ToString() }, "http"); 
 				<a class="rpxnow" onclick="return false;" href="https://shcil.rpxnow.com/openid/v2/signin?token_url=@Url.Encode(authenticationUrl)">
-					Sign In with OpenID
+					Sign In
 				</a>
 			}
 			else

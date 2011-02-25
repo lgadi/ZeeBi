@@ -25,9 +25,16 @@ namespace ZeeBi.UI.Services
 			var url = new Url {
 				LongUrl = longUrl,
 				Id = id,
-				UserId = userId
+				UserId = userId,
+				Created = DateTime.UtcNow,
+				ClickCount = 0
 			};
-			
+
+			// Normalize and validate long URL
+			url.LongUrl = new UrlNormalizer().Normalize(url.LongUrl);
+			if (url.LongUrl == null) throw new InvalidUrlException(url.LongUrl);
+
+			// Generate or validate short ID
 			if (url.Id == null)
 			{
 				url.Id = _idGenerator.Generate();
@@ -39,11 +46,6 @@ namespace ZeeBi.UI.Services
 					throw new IdAlreadyTakenException(url.Id);
 				}
 			}
-
-			url.LongUrl = new UrlNormalizer().Normalize(url.LongUrl);
-			if (url.LongUrl == null) throw new InvalidUrlException(url.LongUrl);
-			url.Created = DateTime.Now;
-			url.ClickCount = 0;
 
 			DB.Urls.Insert(url, SafeMode.FSyncTrue);
 			return url;

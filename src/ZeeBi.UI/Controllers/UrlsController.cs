@@ -45,25 +45,27 @@ namespace ZeeBi.UI.Controllers
 			return new RedirectResult(url.LongUrl, false);
 		}
 
-	
-
 		[HttpPost]
-		public ActionResult Add(Url url)
+		public ActionResult Add(string longUrl, string id)
 		{
 			try
 			{
-				var user = ViewData["currentUser"] as User;
-				var userId = user == null ? ObjectId.Empty : user.Id;
-				_urlsRespository.Add(url.LongUrl, url.Id, userId);
+				if (string.IsNullOrWhiteSpace(id)) id = null;
+
+				var userId = CurrentUser == null ? ObjectId.Empty : CurrentUser.Id;
+				var url = _urlsRespository.Add(longUrl, id, userId);
+				return RedirectToAction("Created", new { id = url.Id });
 			}
 			catch (IdAlreadyTakenException)
 			{
 				return new HttpStatusCodeResult(409, "ID already taken.");
 			}
-			return RedirectToAction("created", new { id = url.Id });
+			catch (InvalidUrlException)
+			{
+				TempData["Message"] = "This seems like an invalid URL. Wanna try again?";
+				return RedirectToAction("Index");
+			}
 		}
-
-		
 
 		[HttpGet]
 		public ActionResult Created(string id)

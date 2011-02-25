@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -7,7 +6,6 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using System.Web.Script.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -15,7 +13,7 @@ namespace ZeeBi.UI.Controllers
 {
 	public class DeployController : Controller
 	{
-				string GetCommits(JObject payload)
+		string GetCommits(JObject payload)
 		{
 			try
 			{
@@ -31,6 +29,7 @@ namespace ZeeBi.UI.Controllers
 				return string.Empty;
 			}
 		}
+
 		public ActionResult Deploy(string payload)
 		{
 

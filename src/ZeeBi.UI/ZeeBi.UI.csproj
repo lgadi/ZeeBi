@@ -99,6 +99,7 @@
     <Compile Include="Services\UrlsRepository.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Services\UsersRepository.cs" />
+    <Compile Include="Utils\EnumerableExtensions.cs" />
     <Compile Include="ViewModels\Stats\StatsViewModel.cs" />
     <Compile Include="ViewModels\Urls\HomeViewModel.cs" />
     <Compile Include="Views\WebViewPage.cs" />

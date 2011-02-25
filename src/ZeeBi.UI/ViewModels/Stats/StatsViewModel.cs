@@ -8,7 +8,7 @@ namespace ZeeBi.UI.ViewModels.Stats
 	{
 		public Url Url { get; set; }
 		public int PageViewCount { get; set; }
-		public IDictionary<string, int> PageViewsByUserAgent { get; set; }
-		public Dictionary<DateTime, int> PageViewsByDate { get; set; }
+		public ICollection<KeyValuePair<string, int>> PageViewsByUserAgent { get; set; }
+		public ICollection<KeyValuePair<DateTime, int>> PageViewsByDate { get; set; }
 	}
 }

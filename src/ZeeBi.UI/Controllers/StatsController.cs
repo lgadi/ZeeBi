@@ -8,6 +8,7 @@ using MongoDB.Driver.Builders;
 using ZeeBi.UI.DataAccess;
 using ZeeBi.UI.Models;
 using ZeeBi.UI.ViewModels.Stats;
+using ZeeBi.UI.Utils;
 
 namespace ZeeBi.UI.Controllers
 {
@@ -37,14 +38,18 @@ namespace ZeeBi.UI.Controllers
 			});
 		}
 
-		private Dictionary<string, int> GetPageViewsByUserAgent(IMongoQuery query)
+		private ICollection<KeyValuePair<string, int>> GetPageViewsByUserAgent(IMongoQuery query)
 		{
 			var reduce = new BsonJavaScript("function(o, agg) { agg.count++; }");
 			var results = DB.PageViews.Group(query, "UserAgent", new { count = 0 }.ToBsonDocument(), reduce, null).ToList();
-			return results.ToDictionary(x => x["UserAgent"].AsString, x => x["count"].ToInt32());
+
+			return results
+				.ToKeyValuePairs(x => x["UserAgent"].AsString, x => x["count"].ToInt32())
+				.OrderByDescending(kvp => kvp.Value)
+				.ToList();
 		}
 
-		private Dictionary<DateTime, int> GetPageViewsByDate(IMongoQuery query)
+		private ICollection<KeyValuePair<DateTime, int>> GetPageViewsByDate(IMongoQuery query)
 		{
 			var map = new BsonJavaScript(
 @"function() { 
@@ -62,9 +67,11 @@ namespace ZeeBi.UI.Controllers
 }");
 
 			var results = DB.PageViews.MapReduce(query, map, reduce, MapReduceOptions.SetOutput(MapReduceOutput.Inline)).InlineResults.ToList();
-			return results.ToDictionary(
-				x => DateTimeFromUnixTime(x["_id"].AsBsonDocument["day"].AsDouble), 
-				x => x["value"].AsBsonDocument["count"].ToInt32());
+			return results
+				.ToKeyValuePairs(
+					x => DateTimeFromUnixTime(x["_id"].AsBsonDocument["day"].AsDouble), 
+					x => x["value"].AsBsonDocument["count"].ToInt32())
+				.OrderByDescending(kvp => kvp.Key).ToList();
 		}
 
 		private DateTime DateTimeFromUnixTime(double unixTime)

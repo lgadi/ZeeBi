@@ -28,11 +28,12 @@ namespace ZeeBi.UI.Controllers
 			var query = Query.EQ("UrlId", id);
 
 			var pageViewCount = DB.PageViews.Count(query);
-			GetPageViewsByDate(query);
-			return View(new StatsViewModel() {
+
+			return View(new StatsViewModel {
 				PageViewCount = pageViewCount,
 				Url = url,
-				PageViewsByUserAgent = GetPageViewsByUserAgent(query)				
+				PageViewsByUserAgent = GetPageViewsByUserAgent(query),
+				PageViewsByDate = GetPageViewsByDate(query)
 			});
 		}
 
@@ -43,10 +44,10 @@ namespace ZeeBi.UI.Controllers
 			return results.ToDictionary(x => x["UserAgent"].AsString, x => x["count"].ToInt32());
 		}
 
-		private Dictionary<string, int> GetPageViewsByDate(IMongoQuery query)
+		private Dictionary<DateTime, int> GetPageViewsByDate(IMongoQuery query)
 		{
 			//TODO: Why is that not working???
-			var map = new BsonJavaScript("map = function() {"+ 
+			var map = new BsonJavaScript("function() {"+ 
 											"day = Date.UTC(this.ViewedAt.getFullYear(), this.ViewedAt.getMonth(), this.ViewedAt.getDate());"+
 											"emit({day: day, daynum: this.ViewedAt.getDate()}, {count: 1});"+
 										 "}");
@@ -59,13 +60,16 @@ namespace ZeeBi.UI.Controllers
 												");" +
 												"return {count: count};" +
 			                                "}");
-			var mrob = new MapReduceOptionsBuilder();
-			mrob.SetOutput("pageviews_count");
 
-			var results = DB.PageViews.MapReduce(query, map, reduce, mrob);
-			var a = DB.Database.GetCollection("pageviews_count").FindAll();
-			return null; //yeah, well - once it'll work figure out what to return.
+			var results = DB.PageViews.MapReduce(query, map, reduce, MapReduceOptions.SetOutput(MapReduceOutput.Inline)).InlineResults.ToList();
+			return results.ToDictionary(
+				x => DateTimeFromUnixTime(x["_id"].AsBsonDocument["day"].AsDouble), 
+				x => x["value"].AsBsonDocument["count"].ToInt32());
+		}
 
+		private DateTime DateTimeFromUnixTime(double unixTime)
+		{
+			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(unixTime);
 		}
 	}
 }

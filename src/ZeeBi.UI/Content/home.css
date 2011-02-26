@@ -1,7 +1,21 @@
 ﻿/* New URL form */
 
-.messages { width: 600px; min-height: 16px; padding: 2px; text-align: right; }
-.messages span { display:none; color:Green;}
+.messages  
+{
+	min-height: 16px; 
+	padding: 4px; 
+	text-align: left; 
+}
+
+.messages span  
+{
+	display: none; 
+	color: #FF3535; 
+	background-color: #F2F2F2; 
+	border: 2px solid #3E61A8; 
+	border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; 
+	padding: 2px 10px; 
+	font-size: 12px; }
 	
 .form-field 
 {
@@ -26,10 +40,6 @@ form input.blur
 	color : #bbb;
 }
 	
-.messages .error 
-{
-	color:Red;
-}
 
 /* URLs table */
 
@@ -39,7 +49,7 @@ form input.blur
 #my-urls th#created-header { width: 20%; }
 #my-urls th#page-views-header { width: 10%; }
 
-#form-container { width: 830px; margin: 0 auto; }
+#form-container { width: 830px; margin: 0 auto -60px; }
 
 form input 
 {
@@ -64,6 +74,15 @@ form input
 	font-size: 16pt;
 }
 
+#longUrl-messages 
+{
+	left: 40px;
+	text-align: left;
+	position: relative;
+	top: 8px;
+	width: 400px;
+}
+
 #submit-container
 {
 	background: transparent url("/Content/img/shorten-button.png") no-repeat;
@@ -78,3 +97,31 @@ form input
 	width: 100%;
 	height: 100%;
 }
+
+#short-url-container 
+{
+	clear: both;
+	position: relative;
+	top: -60px;
+	display: inline-block;
+}
+
+#id 
+{
+	background-color: #E1E1E1;
+	width: 160px;
+}
+
+#id-messages { text-align: right; }
+
+#id-icon 
+{
+    left: -21px;
+    padding: 0 18px 0 0;
+    position: relative;
+    background: transparent no-repeat;
+}
+
+#id-icon.ok { background-image: url("/Content/img/ok.png"); }
+#id-icon.error { background-image: url("/Content/img/error.png"); }
+	

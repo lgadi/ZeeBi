@@ -7,37 +7,27 @@
 <h2>Shorten a <em>URL!</em></h2>
 
 <div id="form-container">
-	<form>
-	<div id="textbox-container">
-		<input id="longUrl" name="longUrl" type="text" title="enter a URL to shorten" value="@Model.LongUrl"/>
-	</div>
-	<div id="submit-container">
-		<input type="submit" id="submit" value="" /></div>
-	</form>
-	<div class="breaker" />
-</div>
-
-<div class="box">
 	<form action="@Url.Action("add", "urls")" method="post">
-		<div class="form-field">
+		<div id="textbox-container">
+			<input id="longUrl" name="longUrl" type="text" title="enter a URL to shorten" value="@Model.LongUrl"/>
 			<div id="longUrl-messages" class="messages">
 				<span id="longUrl-invalid" class="error">I don't think that's a valid URL</span>
 			</div>
 		</div>
-
-		<div class="form-field">
-			<label for="id">@Url.RouteUrl("Follow", new { id = "XXX" }, "http").Replace("XXX", "")</label>
+		<div id="submit-container">
+			<input type="submit" name="submit" id="submit" value="" />
+		</div>
+		<div id="short-url-container" class="breaker">
+			http://extremelylongurlshorteningserviceprovider.info/
 			<input id="id" name="id" type="text" title="we'll make something up" value="@Model.Id"/>
+			<span id="id-icon"></span>
 			<div id="id-messages" class="messages">
 				<span id="id-too-short" class="error">we need at least 5 characters</span>
 				<span id="id-duplicate" class="error">looks like this is already taken</span>
-				<span id="id-ok">available!</span>
 			</div>
 		</div>
-		<div class="form-actions">
-			<input class="button" id="submit" type="submit" value="Shorten it!" />
-		</div>
 	</form>
+	<div class="breaker"></div>
 </div>
 
 @if (Model.MyUrls != null) 
@@ -55,21 +45,25 @@
 
 	$(function () {
 		$('#id, #longUrl').hint();
+
 		$('#id').bind('change keyup', function () {
 			$('#id-messages span').hide();
+			$('#id-icon').removeClass('error').removeClass('ok');
 
 			if (this.value.length == 0) return;
 
 			if (this.value.length < 5) {
 				$('#id-too-short').show();
+				$('#id-icon').addClass('error');
 				return;
 			}
 
 			$.getJSON('@Url.Action("isAvailable")', { "id": this.value }, function (isAvailable) {
 				if (isAvailable) {
-					$('#id-ok').show();
+					$('#id-icon').addClass('ok');
 				} else {
 					$('#id-duplicate').show();
+					$('#id-icon').addClass('error');
 				}
 			});
 

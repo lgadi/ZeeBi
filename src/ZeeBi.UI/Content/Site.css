@@ -1,8 +1,10 @@
+/* Common Elements */ 
+
 body
 {
     font-family: "Trebuchet MS", Helvetica, Arial, Sans-Serif;
-    background: white url("/Content/img/background.png") repeat-x;
-    /* background-attachment: scroll; */
+    background: #3359A9 url("/Content/img/background.png") repeat-x;
+	color: white;
 }
 
 #content
@@ -12,111 +14,27 @@ body
 	text-align: center;
 }
 
-/* Default Colors */
-
-.box a 
-{
-	text-decoration: underline;
-	color: #26452a;
-}
-
-.box a:visited
-{
-	color: #26452a;
-}
-
-.box a:hover
-{
-	color: #FF3D23;
-}
-
-
-/* Header */
-
-#current-user {
-    background-color: #2128FF;
-    border: 1px solid #ddf;
-    border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    color: white;
-    float: right;
-    padding: 5px;
-    position: relative;
-    top: -10px;
-}
-
-#current-user a, #current-user a:visited { color: #FFA968; text-decoration: none; }
-
-#current-user .username { font-weight: bold; }
-
-#global-message
-{
-    position: absolute;
-    top: 0;
-	left: 0;
-	width: 100%;
-}
-
-#global-message span
-{
-	background-color: #FFF9C1;
-    border: 1px solid gray;
-    border-radius: 0 0 5px 5px;
-    -moz-border-radius: 0 0 5px 5px;
-    -webkit-border-radius: 0 0 5px 5px;
-    color: red;
-    margin: 0 auto;
-    padding: 5px 20px;
-}
-
-h1
-{
-	font-family: "Luckiest Guy", "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
-	font-size: 28pt;
-	color: white;
-	text-shadow: 2px 2px 2px #26452a, 4px 4px 5px black;
-	margin: 40px 0;
-}
-
-h1 a, h1 a:hover, h1 a:visited 
-{
-	color: inherit;
-	text-decoration: inherit;
-}
-
-h2
-{
-	font-family: "Yanone Kaffeesatz", "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
-	font-size: 30pt;
-	color: white;
-	text-shadow: 1px 1px #26452a;
-	margin: 20px 0;
-}
-
-h2 a, h2 a:visited
-{
-	color: inherit;
-	text-decoration: none;
-}
-
-h2 a:hover
-{
-	color: #efe;
-	text-decoration: underline;
-}
-
-/* Common Elements */ 
-
 .box
 {
-	border: 1px solid gray;
-	background-color: #fff9c1;
+	border: 2px solid #294070;
+	background-color: #E1E1E1;
 	border-radius: 15px;
 	-moz-border-radius: 15px;
 	-webkit-border-radius: 15px;
 	padding: 5px;
 	margin: 10px;
+	color: #333;
+}
+
+.box a , .box a:visited
+{
+	text-decoration: underline;
+	color: #2A498B;
+}
+
+.box a:hover
+{
+	color: #3C6AC4;
 }
 
 input 
@@ -155,20 +73,85 @@ button, .button
 
 table
 {
-	border: 1px solid gray;		
+	border: 1px solid #294070;		
 }
 	
 table thead
 {
-	background-color: #faa255;
-	color: black;
+	background-color: #2A498B;
+	color: white;
 }
 	
 table td, table th { padding: 2px; }
 	
-table tr { border: 1px solid gray; }
+table tr { border: 1px solid #294070; }
 	
 table tr.summary 
 {
 	font-weight: bold;
 }
+
+/* Header */
+
+
+#topbar 
+{
+	margin: 5px auto;
+}	
+
+#topbar div 
+{
+    background-color: #C4C4C4;
+    border: 3px solid #294070;
+    border-radius: 15px;
+    -moz-border-radius: 15px;
+    -webkit-border-radius: 15px;
+    color: #333;
+    padding: 5px;
+}
+
+#current-user { float: right; }
+#current-user a, #current-user a:visited { color: #2A4A8C; text-decoration: none; }
+#current-user .username { font-weight: bold; }
+
+#global-message { max-width: 500px; margin: 0 auto; }
+#global-message .error { color: #FF1414; }
+
+#header { clear: both; }
+	
+h1
+{
+	font-family: "Luckiest Guy", "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
+	font-size: 28pt;
+	color: white;
+	text-shadow: 2px 2px 2px #26452a, 4px 4px 5px black;
+	margin: 40px 0;
+}
+
+h1 a, h1 a:hover, h1 a:visited 
+{
+	color: inherit;
+	text-decoration: inherit;
+}
+
+h2
+{
+	font-family: "Yanone Kaffeesatz", "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
+	font-size: 30pt;
+	color: white;
+	text-shadow: 1px 1px #26452a;
+	margin: 20px 0;
+}
+
+h2 a, h2 a:visited
+{
+	color: inherit;
+	text-decoration: none;
+}
+
+h2 a:hover
+{
+	color: #efe;
+	text-decoration: underline;
+}
+

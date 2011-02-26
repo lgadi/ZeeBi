@@ -107,6 +107,7 @@
   <ItemGroup>
     <Content Include="Content\home.css" />
     <Content Include="Content\img\background.png" />
+    <Content Include="Content\img\logo.png" />
     <Content Include="Content\reset.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

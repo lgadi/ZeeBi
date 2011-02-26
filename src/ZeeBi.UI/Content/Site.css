@@ -37,6 +37,7 @@ a:hover
 	margin: 10px auto;
 	color: #333;
 	width: 750px;
+	text-align: left;
 }
 
 .box a, .box a:visited

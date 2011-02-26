@@ -3,6 +3,7 @@
 body
 {
     font-family: "Trebuchet MS", Tahoma, Helvetica, Arial, Sans-Serif;
+    font-size: 14px;
     background: #3359A9 url("/Content/img/background.png") repeat-x;
 	color: white;
 }
@@ -152,3 +153,4 @@ h2 a:hover
 	text-decoration: underline;
 }
 
+.breaker { clear: both; }

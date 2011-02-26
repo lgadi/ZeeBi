@@ -6,10 +6,20 @@
 
 <h2>Shorten a <em>URL!</em></h2>
 
+<div id="form-container">
+	<form>
+	<div id="textbox-container">
+		<input id="longUrl" name="longUrl" type="text" title="enter a URL to shorten" value="@Model.LongUrl"/>
+	</div>
+	<div id="submit-container">
+		<input type="submit" id="submit" value="" /></div>
+	</form>
+	<div class="breaker" />
+</div>
+
 <div class="box">
 	<form action="@Url.Action("add", "urls")" method="post">
 		<div class="form-field">
-			<input id="longUrl" name="longUrl" type="text" title="enter a URL to shorten" value="@Model.LongUrl"/>
 			<div id="longUrl-messages" class="messages">
 				<span id="longUrl-invalid" class="error">I don't think that's a valid URL</span>
 			</div>

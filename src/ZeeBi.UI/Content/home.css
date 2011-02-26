@@ -21,18 +21,6 @@ form label
 	padding-right: 3px;
 }
 	
-#longUrl
-{
-	width : 600px;
-}
-	
-#id { width : 200px; }
-	
-#submit 
-{
-	width: 200px;
-}
-
 form input.blur
 {
 	color : #bbb;
@@ -50,3 +38,43 @@ form input.blur
 #my-urls th#long-url-header { width: 50%; }
 #my-urls th#created-header { width: 20%; }
 #my-urls th#page-views-header { width: 10%; }
+
+#form-container { width: 830px; margin: 0 auto; }
+
+form input 
+{
+	background: transparent;
+	border: 0;
+	color: #8C8C8C;
+}
+
+#textbox-container 
+{
+	background: transparent url("/Content/img/textbox.png") no-repeat;
+	float: left;
+	height: 36px;
+	margin-top: 5px;
+	padding: 10px 30px 40px 60px;
+	width: 481px;
+}
+
+#longUrl  
+{
+	width: 100%; 
+	font-size: 16pt;
+}
+
+#submit-container
+{
+	background: transparent url("/Content/img/shorten-button.png") no-repeat;
+    float: left;
+    height: 60px;
+    padding: 4px 60px 80px 30px;
+    width: 160px;
+}
+
+#submit 
+{
+	width: 100%;
+	height: 100%;
+}

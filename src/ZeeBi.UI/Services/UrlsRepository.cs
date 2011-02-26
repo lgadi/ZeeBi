@@ -97,5 +97,10 @@ namespace ZeeBi.UI.Services
 		{
 			return DB.Urls.Find(Query.EQ("UserId", userId)).SetSortOrder(SortBy.Descending("Created")).ToList();
 		}
+
+		public int GetTotalUrlsShortened()
+		{
+			return DB.Urls.Count();
+		}
 	}
 }

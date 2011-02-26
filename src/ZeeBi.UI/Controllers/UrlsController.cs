@@ -29,6 +29,7 @@ namespace ZeeBi.UI.Controllers
 
 			model.LongUrl = TempData["Input.LongUrl"] as string;
 			model.Id = TempData["Input.Id"] as string;
+			model.TotalUrlsShortened = _urlsRespository.GetTotalUrlsShortened();
 			return View(model);
 		}
 

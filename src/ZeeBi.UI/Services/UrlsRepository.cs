@@ -69,7 +69,7 @@ namespace ZeeBi.UI.Services
 		private string TransformUserAgent(string userAgent)
 		{
 			//TODO: Think of a nicer way to do that...
-			var transformedUserAgent = "other";
+			var transformedUserAgent = "Other";
 
 			if (userAgent.Contains("Chrome")) transformedUserAgent = "Chrome";
 			if (userAgent.Contains("MSIE")) transformedUserAgent = "Internet Explorer";

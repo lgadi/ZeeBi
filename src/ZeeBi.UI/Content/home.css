@@ -82,7 +82,7 @@ form input
     height: 60px;
     padding: 4px 60px 80px 30px;
 	margin: 0 -60px -80px 0;
-    width: 200px;
+    width: 160px;
 }
 
 #short-url-container 
@@ -95,7 +95,7 @@ form input
 #id 
 {
 	background-color: #E1E1E1;
-	width: 160px;
+	width: 200px;
 	border: 1px solid #3E527C;
 	padding-right: 22px;
 }

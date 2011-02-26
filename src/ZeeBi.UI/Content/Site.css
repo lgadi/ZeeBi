@@ -111,8 +111,7 @@ table tr.summary
 }
 
 #login-indicator { float: right; }
-#login-indicator a, #login-indicator a:visited { color: #2A4A8C; text-decoration: none; }
-#login-indicator .username { font-weight: bold; }
+#login-indicator a, #login-indicator a:visited { color: #2A4A8C; text-decoration: none; font-weight: bold; }
 
 #global-message { max-width: 500px; margin: 0 auto; }
 #global-message .error { color: #FF1414; }

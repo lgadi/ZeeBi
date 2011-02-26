@@ -128,6 +128,16 @@ h1 a, h1 a:hover, h1 a:visited
 	text-decoration: inherit;
 }
 
+h3 
+{
+	font-family: "Yanone Kaffeesatz", "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
+	font-size: 16pt;
+	color: #FB0;
+	text-shadow: 1px 1px #26452a;
+	margin: 20px 0;
+}
+
+
 h2
 {
 	font-family: "Trebuchet MS", Tahoma, Helvetica, Arial, Sans-Serif;

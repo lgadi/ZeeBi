@@ -69,7 +69,7 @@ namespace ZeeBi.UI.Services
 		private string TransformUserAgent(string userAgent)
 		{
 			//TODO: Think of a nicer way to do that...
-			var transformedUserAgent = "other";
+			var transformedUserAgent = "Other";
 
 			if (userAgent.Contains("Chrome")) transformedUserAgent = "Chrome";
 			if (userAgent.Contains("MSIE")) transformedUserAgent = "Internet Explorer";
@@ -96,6 +96,11 @@ namespace ZeeBi.UI.Services
 		public IList<Url> FindByUser(ObjectId userId)
 		{
 			return DB.Urls.Find(Query.EQ("UserId", userId)).SetSortOrder(SortBy.Descending("Created")).ToList();
+		}
+
+		public int GetTotalUrlsShortened()
+		{
+			return DB.Urls.Count();
 		}
 	}
 }

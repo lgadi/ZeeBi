@@ -20,21 +20,6 @@ namespace ZeeBi.UI.Controllers
 		[HttpGet]
 		public ActionResult Index()
 		{
-			HttpCookie cookie = Request.Cookies.Get("userId");
-			BsonObjectId userId = null;
-
-			if (cookie != null)
-			{
-				var userIdString = cookie.Value;
-				if (!string.IsNullOrEmpty(userIdString))
-				{
-					userId = new BsonObjectId(userIdString);
-				}
-			}
-			if (userId != null)
-			{
-				ViewBag.UserId = userId.ToString();
-			}
 			return View();
 		} 
 		

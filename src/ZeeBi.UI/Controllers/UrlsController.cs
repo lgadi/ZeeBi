@@ -29,6 +29,7 @@ namespace ZeeBi.UI.Controllers
 
 			model.LongUrl = TempData["Input.LongUrl"] as string;
 			model.Id = TempData["Input.Id"] as string;
+			model.TotalUrlsShortened = _urlsRespository.GetTotalUrlsShortened();
 			return View(model);
 		}
 
@@ -42,7 +43,7 @@ namespace ZeeBi.UI.Controllers
 			var url = _urlsRespository.FindById(id);
 			if (url == null)
 				return Responses.NotFound;
-			Console.WriteLine(id);
+			
 			_urlsRespository.RecordAnalytics(url, Request);
 
 			return new RedirectResult(url.LongUrl, false);

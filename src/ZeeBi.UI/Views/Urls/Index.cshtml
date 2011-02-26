@@ -9,17 +9,17 @@
 <div id="form-container">
 	<form action="@Url.Action("add", "urls")" method="post">
 		<div id="textbox-container">
-			<input id="longUrl" name="longUrl" type="text" title="enter a URL to shorten" value="@Model.LongUrl"/>
+			<input id="longUrl" name="longUrl" type="text" title="enter a URL to shorten" value="@Model.LongUrl" autocomplete="off"/>
 			<div id="longUrl-messages" class="messages">
 				<span id="longUrl-invalid" class="error">I don't think that's a valid URL</span>
 			</div>
 		</div>
 		<div id="submit-container">
-			<input type="submit" name="submit" id="submit" value="" />
+			<input class="button" type="submit" name="submit" id="submit" value="" />
 		</div>
 		<div id="short-url-container" class="breaker">
-			http://extremelylongurlshorteningserviceprovider.info/
-			<input id="id" name="id" type="text" title="we'll make something up" value="@Model.Id"/>
+			<label for="id">http://extremelylongurlshorteningserviceprovider.info/</label>
+			<input id="id" name="id" type="text" title="we'll make something up" value="@Model.Id" autocomplete="off"/>
 			<span id="id-icon"></span>
 			<div id="id-messages" class="messages">
 				<span id="id-too-short" class="error">we need at least 5 characters</span>

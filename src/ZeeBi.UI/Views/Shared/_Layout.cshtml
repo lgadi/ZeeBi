@@ -23,7 +23,7 @@
 <body>
 	<div id="content">
 		<div id="topbar">
-			<div id="current-user">
+			<div id="login-indicator">
 				@if (CurrentUser == null)
 				{
 					var authenticationUrl = Url.Action("Authenticate", "Authentication", new { returnUrl = Request.Url.ToString() }, "http"); 

@@ -2,7 +2,7 @@
 
 body
 {
-    font-family: "Trebuchet MS", Helvetica, Arial, Sans-Serif;
+    font-family: "Trebuchet MS", Tahoma, Helvetica, Arial, Sans-Serif;
     background: #3359A9 url("/Content/img/background.png") repeat-x;
 	color: white;
 }
@@ -110,9 +110,9 @@ table tr.summary
     padding: 5px;
 }
 
-#current-user { float: right; }
-#current-user a, #current-user a:visited { color: #2A4A8C; text-decoration: none; }
-#current-user .username { font-weight: bold; }
+#login-indicator { float: right; }
+#login-indicator a, #login-indicator a:visited { color: #2A4A8C; text-decoration: none; }
+#login-indicator .username { font-weight: bold; }
 
 #global-message { max-width: 500px; margin: 0 auto; }
 #global-message .error { color: #FF1414; }
@@ -121,10 +121,6 @@ table tr.summary
 	
 h1
 {
-	font-family: "Luckiest Guy", "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
-	font-size: 28pt;
-	color: white;
-	text-shadow: 2px 2px 2px #26452a, 4px 4px 5px black;
 	margin: 40px 0;
 }
 
@@ -136,12 +132,14 @@ h1 a, h1 a:hover, h1 a:visited
 
 h2
 {
-	font-family: "Yanone Kaffeesatz", "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
+	font-family: "Trebuchet MS", Tahoma, Helvetica, Arial, Sans-Serif;
 	font-size: 30pt;
+	font-weight: bold;
 	color: white;
-	text-shadow: 1px 1px #26452a;
 	margin: 20px 0;
 }
+
+h2 em { color: #FFC72F; }
 
 h2 a, h2 a:visited
 {

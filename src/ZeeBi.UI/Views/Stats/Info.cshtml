@@ -33,11 +33,14 @@
 	
 </style>
 
-<h2>Info for <a href="@shortUrl">@shortUrl</a></h2>
+<h2>URL Info</h2>
 
 <div class="box">
 	<div id="qrcode-container">
 		<img alt="QR code for @shortUrl" title="QR code for @shortUrl" src="http://chart.apis.google.com/chart?cht=qr&chl=@shortUrl&choe=UTF-8&chs=100x100" />
+	</div>
+	<div class="stat-field">
+		Short URL: <a href="@shortUrl">@shortUrl</a>
 	</div>
 	<div class="stat-field">
 		Long URL: <a href="@Model.Url.LongUrl">@Model.Url.LongUrl</a>
@@ -90,8 +93,8 @@
 		valueString = valueString.TrimEnd(',');
 	}
 	
-	<div id="pageviews-history">
-		<img src="http://chart.apis.google.com/chart?chf=bg,s,FFF9C1&chs=440x220&cht=lxy&chco=3072F3&chds=-6,0,0,@maxValue&chd=t:-6,-5,-4,-3,-2,-1,0|@valueString&chdl=Page+Views&chdlp=b&chg=-1,0&chls=2&chma=5,5,5,25&chtt=Page+Views+History" />
+	<div class="stat-field" id="pageviews-history">
+		<img alt="Page views history graph" src="http://chart.apis.google.com/chart?chf=bg,s,E1E1E1&chs=440x220&cht=lxy&chco=3072F3&chds=-6,0,0,@maxValue&chd=t:-6,-5,-4,-3,-2,-1,0|@valueString&chdl=Page+Views&chdlp=b&chg=-1,0&chls=2&chma=5,5,5,25&chtt=Page+Views+History" />
 	</div>
 
 	<div class="stat-field">

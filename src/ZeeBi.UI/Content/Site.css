@@ -119,7 +119,7 @@ button, .button
 	
 h1
 {
-	margin: 40px 0;
+	margin: 40px 0 10px;
 }
 
 h1 a, h1 a:hover, h1 a:visited 
@@ -130,21 +130,20 @@ h1 a, h1 a:hover, h1 a:visited
 
 h3 
 {
-	font-family: "Yanone Kaffeesatz", "Berlin Sans FB Demi", Helvetica, Arial, Sans-Serif;
-	font-size: 16pt;
-	color: #FB0;
-	text-shadow: 1px 1px #26452a;
-	margin: 20px 0;
+	font-size: 12pt;
+	text-shadow: 1px 1px #294070;
+	margin: 0 0 50px;
 }
 
+h3 em { color: #FB0; }
 
 h2
 {
-	font-family: "Trebuchet MS", Tahoma, Helvetica, Arial, Sans-Serif;
 	font-size: 30pt;
 	font-weight: bold;
 	color: white;
 	margin: 20px 0;
+	text-shadow: 2px 2px #294070;
 }
 
 h2 em { color: #FFC72F; }

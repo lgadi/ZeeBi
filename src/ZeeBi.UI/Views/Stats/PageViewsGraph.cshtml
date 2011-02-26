@@ -1,0 +1,17 @@
+﻿@model ICollection<KeyValuePair<DateTime, int>>
+
+@{
+	const int historySize = 7; // TODO parameterize?
+	
+	// We want the last 7 days, padded with zeroes if needed
+	var values = Model.Take(7).Select(kvp => kvp.Value).ToList();
+	var maxValue = values.Max();
+	if (values.Count < historySize) { values.AddRange(Enumerable.Repeat(0, historySize - values.Count)); }
+	
+	// Reverse the values' order so that the last day is at the end and the padding is at the beginning
+	values.Reverse();
+	
+	var valueString = string.Join(",", values.Select(v => v.ToString()).ToArray());	
+}
+
+<img alt="Page views history graph" src="http://chart.apis.google.com/chart?chf=bg,s,E1E1E1&chs=440x220&cht=lxy&chco=3072F3&chds=-6,0,0,@maxValue&chd=t:-6,-5,-4,-3,-2,-1,0|@valueString&chdl=Page+Views&chdlp=b&chg=-1,0&chls=2&chma=5,5,5,25&chtt=Page+Views+History" />

@@ -71,30 +71,9 @@
 			</table>
 		</div>
 	</div>
-	@{
-		var valueString = "";
-		var maxValue = 0;
-		
-		//First, fill in 0 for when we don't have history
-        var historySize = Math.Min(Model.PageViewsByDate.Count, 7);
-		for (var i = 0;i< 7-historySize; i++) 
-		{
-			valueString += "0,";
-		}	
-		// Then, calculate real values and max value (for nicer graph)
-		for (var i = 0; i < historySize; i++)
-		{
-			// We want it in reverse order to make sense
-			var kv = Model.PageViewsByDate.ElementAt(historySize-i-1);
-			if (kv.Value > maxValue) { maxValue = kv.Value; }
-			valueString += kv.Value + ",";
-		}
-		// Remember to pay Moti royalties for the trim...
-		valueString = valueString.TrimEnd(',');
-	}
 	
 	<div class="stat-field" id="pageviews-history">
-		<img alt="Page views history graph" src="http://chart.apis.google.com/chart?chf=bg,s,E1E1E1&chs=440x220&cht=lxy&chco=3072F3&chds=-6,0,0,@maxValue&chd=t:-6,-5,-4,-3,-2,-1,0|@valueString&chdl=Page+Views&chdlp=b&chg=-1,0&chls=2&chma=5,5,5,25&chtt=Page+Views+History" />
+		@Html.Partial("PageViewsGraph", Model.PageViewsByDate)
 	</div>
 
 	<div class="stat-field">

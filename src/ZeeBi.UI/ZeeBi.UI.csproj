@@ -107,7 +107,13 @@
   <ItemGroup>
     <Content Include="Content\home.css" />
     <Content Include="Content\img\background.png" />
+    <Content Include="Content\img\error.png" />
+    <Content Include="Content\img\link.png" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\ok.png" />
+    <Content Include="Content\img\repeat-button.png" />
+    <Content Include="Content\img\shorten-button.png" />
+    <Content Include="Content\img\textbox.png" />
     <Content Include="Content\reset.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />

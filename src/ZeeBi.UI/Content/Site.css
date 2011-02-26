@@ -15,6 +15,17 @@ body
 	text-align: center;
 }
 
+a, a:visited 
+{
+	text-decoration: underline;
+	color: #E6BA3F;
+}
+
+a:hover
+{
+	color: #FFCE47;
+}
+
 .box
 {
 	border: 2px solid #294070;
@@ -27,7 +38,7 @@ body
 	color: #333;
 }
 
-.box a , .box a:visited
+.box a, .box a:visited
 {
 	text-decoration: underline;
 	color: #2A498B;
@@ -43,33 +54,8 @@ input
 	font-size: inherit;
 	font-family: inherit;
 	border: 1px solid #ccc;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
+	border-radius: 5px;	-moz-border-radius: 5px; -webkit-border-radius: 5px;
 	padding: 1px 3px;
-}
-
-button, .button
-{
-		border: 1px solid gray;
-		background-color: #e66800;
-		border-radius: 5px;
-		-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-		color: white;
-		font-size: 16pt;
-		background-image: -webkit-gradient(
-			linear,
-			left top,
-			left bottom,
-			color-stop(0.25, rgb(250,162,85)),
-			color-stop(0.75, rgb(230,104,0))
-		);
-		background-image: -moz-linear-gradient(
-			center top,
-			rgb(250,162,85) 25%,
-			rgb(230,104,0) 75%
-		);
 }
 
 table

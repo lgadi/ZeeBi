@@ -1,5 +1,7 @@
 /* Common Elements */ 
 
+html, body { height: 100%; }
+
 body
 {
     font-family: "Trebuchet MS", Tahoma, Helvetica, Arial, Sans-Serif;
@@ -11,7 +13,8 @@ body
 #content
 {
 	width: 960px;
-	margin: 0 auto;
+	margin: 0 auto -60px;
+	min-height: 100%;
 	text-align: center;
 }
 
@@ -96,7 +99,8 @@ button, .button
 
 #topbar 
 {
-	margin: 5px auto;
+	margin: 0 auto;
+	padding: 5px 0;
 	font-size: 12px; 
 }	
 
@@ -118,6 +122,10 @@ button, .button
 #global-message .error { color: #FF1414; }
 
 #header { clear: both; }
+
+#footer, #footer-pusher { height: 40px; }
+
+#footer { width: 100%; color: #cce; text-align: center; line-height: 1.5; padding-top: 15px; }
 	
 h1
 {

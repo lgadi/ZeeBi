@@ -22,7 +22,8 @@ namespace ZeeBi.UI.Services
 
 		public Url Add(string longUrl, string id = null, ObjectId userId = default(ObjectId))
 		{
-			var url = new Url {
+			var url = new Url
+			{
 				LongUrl = longUrl,
 				Id = id,
 				UserId = userId,
@@ -55,8 +56,9 @@ namespace ZeeBi.UI.Services
 		{
 
 			DB.PageViews.Insert(new PageView
-			                    	{
+			{
 				UrlId = url.Id,
+				OriginalUserAgent = request.UserAgent,
 				UserAgent = TransformUserAgent(request.UserAgent),
 				UserIp = request.UserHostAddress,
 				ViewedAt = DateTime.Now
@@ -68,19 +70,19 @@ namespace ZeeBi.UI.Services
 
 		private string TransformUserAgent(string userAgent)
 		{
-			//TODO: Think of a nicer way to do that...
-			var transformedUserAgent = "Other";
+			if (string.IsNullOrEmpty(userAgent)) return "EMPTY";
 
-			if (userAgent.Contains("Chrome")) transformedUserAgent = "Chrome";
-			if (userAgent.Contains("MSIE")) transformedUserAgent = "Internet Explorer";
-			if (userAgent.Contains("Firefox")) transformedUserAgent = "Firefox";
-			if (userAgent.Contains("Opera")) transformedUserAgent = "Opera";
-			if (userAgent.Contains("Links")) transformedUserAgent = "Links";
-			if (userAgent.Contains("BlackBerry")) transformedUserAgent = "BlackBerry";
-			if (userAgent.Contains("IEMobile")) transformedUserAgent = "Mobile IE";
-			if (userAgent.Contains("iPhone")) transformedUserAgent = "iPhone";
+			if (userAgent.Contains("Chrome")) return "Chrome";
+			if (userAgent.Contains("IEMobile")) return "Mobile IE";
+			if (userAgent.Contains("MSIE")) return "Internet Explorer";
+			if (userAgent.Contains("Firefox")) return "Firefox";
+			if (userAgent.Contains("Opera")) return "Opera";
+			if (userAgent.Contains("iPhone")) return "iPhone";
+			if (userAgent.Contains("BlackBerry")) return "BlackBerry";
+			if (userAgent.Contains("Safari")) return "Safari";
+			if (userAgent.Contains("Links")) return "Links";
 
-			return transformedUserAgent;
+			return "Other";
 		}
 
 		public bool IsAvailable(string id)

@@ -28,5 +28,6 @@ namespace ZeeBi.UI.Models
 
 		public string UserAgent { get; set; }
 
+		public string OriginalUserAgent { get; set; }
 	}
 }

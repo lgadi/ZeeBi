@@ -21,6 +21,7 @@ namespace ZeeBi.UI.Controllers
 
 		public ActionResult Index()
 		{
+			RequestsLog.SaveRequestData(HttpContext);
 			var model = new HomeViewModel();
 			if (CurrentUser != null)
 			{

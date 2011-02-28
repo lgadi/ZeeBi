@@ -7,6 +7,7 @@ using MongoDB.Driver;
 using MongoDB.Driver.Builders;
 using ZeeBi.UI.DataAccess;
 using ZeeBi.UI.Models;
+using ZeeBi.UI.Services;
 using ZeeBi.UI.ViewModels.Stats;
 using ZeeBi.UI.Utils;
 
@@ -17,6 +18,7 @@ namespace ZeeBi.UI.Controllers
 		[HttpGet]
 		public ActionResult Info(string id)
 		{
+			RequestsLog.SaveRequestData(HttpContext);
 			var url = DB.Urls.FindOneById(id);
 			if (url == null)
 				return Responses.NotFound;

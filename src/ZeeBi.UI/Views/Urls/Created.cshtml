@@ -23,6 +23,8 @@
 		background: transparent url("/Content/img/repeat-button.png") no-repeat;
 	}
 	
+	div { margin-bottom: 5px; }
+	
 </style>
 
 <h2><em>URL</em> Shortened!</h2>
@@ -33,7 +35,14 @@
 		<span id="repeat-container"><a href="@Url.Action("Index")"><button id="repeat-button"></button></a></span>
 	</div>
 	<div id="info-container">
-		Track how users follow your URL at its <a href="@Url.Action("info", "stats", new { id = Model.Id })">info page</a>.
+		Track how users follow your URL at its <a href="@Url.Action("info", "stats", new { id = Model.Id })">info page</a>. <br />
 	</div>
+
+	@if (CurrentUser == null)
+	{
+		<div>
+			Pro tip: if you were @Html.Partial("SignInLink", "signed in") we would remember your shortened URLs for you.
+		</div>
+	}
 
 </div>

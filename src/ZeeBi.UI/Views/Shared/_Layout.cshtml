@@ -16,10 +16,7 @@
 			<div id="login-indicator">
 				@if (CurrentUser == null)
 				{
-					var authenticationUrl = Url.Action("Authenticate", "Authentication", new { returnUrl = Request.Url.ToString() }, "http"); 
-					<a class="rpxnow" onclick="return false;" href="https://shcil.rpxnow.com/openid/v2/signin?token_url=@Url.Encode(authenticationUrl)">
-						Sign In
-					</a>
+					@Html.Partial("SignInLink", "Sign In")
 				}
 				else
 				{
@@ -47,7 +44,7 @@
 	</div>
 
 	<div id="footer">
-		extremelylongurlshorteningserviceprovider.info is a proud member of the <a href="http://www.delver.com/in?invite=dojo" target="_blank">Delver</a> Creativity Dojo 2011 <br />
+		extremelylongurlshorteningserviceprovider.info is a proud member of the <a href="http://team.delver.com" target="_blank">Delver</a> Creativity Dojo 2011 <br />
 		Graphic design by Isaac Studios
 	</div>
 

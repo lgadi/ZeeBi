@@ -13,30 +13,12 @@ namespace ZeeBi.UI.Controllers
 {
 	public class DeployController : Controller
 	{
-		string GetCommits(JObject payload)
-		{
-			try
-			{
-				var commits =  payload["commits"]
-					.Cast<JObject>()
-					.OrderByDescending(c=>c["timestamp"].ToString())
-					.ToArray();
-
-				return JsonConvert.SerializeObject(commits, Formatting.Indented);
-			}
-			catch (Exception)
-			{
-				return string.Empty;
-			}
-		}
-
 		public ActionResult Deploy(string payload)
 		{
 
 			var sentPayload = JsonConvert.DeserializeObject<JObject>(payload);
 
-			var head = sentPayload["after"].ToString();
-
+			var head = GetHead(sentPayload);
 			var commits = GetCommits(sentPayload);
 
 			var sourcesUrl = "https://github.com/lgadi/ZeeBi/zipball/master";
@@ -104,6 +86,35 @@ namespace ZeeBi.UI.Controllers
 			System.IO.File.AppendAllText(logFile, "\r\nDownloading sources ... ");
 
 			return Content("OK");
+		}
+
+		private string GetHead(JObject sentPayload)
+		{
+			try
+			{
+				return sentPayload["after"].ToString();
+			}
+			catch (Exception)
+			{
+				return "unknown";
+			}
+		}
+
+		private string GetCommits(JObject payload)
+		{
+			try
+			{
+				var commits =  payload["commits"]
+					.Cast<JObject>()
+					.OrderByDescending(c=>c["timestamp"].ToString())
+					.ToArray();
+
+				return JsonConvert.SerializeObject(commits, Formatting.Indented);
+			}
+			catch (Exception)
+			{
+				return string.Empty;
+			}
 		}
 	}
 }

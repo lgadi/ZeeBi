@@ -88,8 +88,10 @@ target package:
 desc "deploy to the dojo server"
 target deploy:
 
-	print "Stopping website"
-	exec("C:\\Windows\\system32\\inetsrv\\appcmd.exe", "stop site ZeeBi")
+	# Stopping and starting the website could maybe have helped avoid file/dir locks, but we don't have permissions for it so screw it.
+	
+	# print "Stopping website"
+	# exec("C:\\Windows\\system32\\inetsrv\\appcmd.exe", "stop site ZeeBi")
 
 	source = outDir;
 	dest = "C:\\ZeeBi\\website"
@@ -112,6 +114,6 @@ target deploy:
 		targetFile = newPath.Replace(source, dest)
 		cp(newPath, targetFile)
 
-	print "Starting website"
-	exec("C:\\Windows\\system32\\inetsrv\\appcmd.exe", "start site ZeeBi")	
+	# print "Starting website"
+	# exec("C:\\Windows\\system32\\inetsrv\\appcmd.exe", "start site ZeeBi")	
 	

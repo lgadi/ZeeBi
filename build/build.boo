@@ -29,13 +29,11 @@ def writeBuildInfo:
 	File.WriteAllLines(sourceOutFilename, array(string, lines))
 
 def copyDir(source as string, dest as string, search):
-	Directory.CreateDirectory(dest) if not Directory.Exists(dest)
 	for dirPath in Directory.GetDirectories(source, "*", SearchOption.AllDirectories):
-		other = dirPath.Replace(source, dest)
-		Directory.CreateDirectory(other) if not Directory.Exists(other)
+		Directory.CreateDirectory(dirPath.Replace(source, dest))
 		
 	for newPath in Directory.GetFiles(source, search, SearchOption.AllDirectories):
-		File.Copy(newPath, newPath.Replace(source, dest), true)
+		cp(newPath, newPath.Replace(source, dest))
 
 #getRepo()
 
@@ -89,31 +87,20 @@ target package:
 	
 desc "deploy to the dojo server"
 target deploy:
+
+	print "Stopping website"
+	exec("C:\\Windows\\system32\\inetsrv\\appcmd.exe", "stop site ZeeBi")
+
 	source = outDir;
 	dest = "C:\\ZeeBi\\website"
-	backup = "C:\\ZeeBi\\website-backup"
 	print "copying from ${source} to ${dest}"
 	
-	succeed = false
-	attempts = 0
-	
-	copyDir(dest, backup, "*.*")
-	while not succeed and attempts < 3:
-		try:
-			for dirPath in Directory.GetDirectories(dest, "*"):
-				print "removing dir ${dirPath}"
-				Directory.Delete(dirPath, true)
-			for filePath in Directory.GetFiles(dest, "*.*"):
-				print "deleting file ${filePath}"
-				File.Delete(filePath)
-			succeed = true
-		except e:
-			attempts +=1
-	if not succeed:
-		print "failed to cleanup previous version."
-		copyDir(backup, dest, "*.*")
-		Directory.Delete(backup, true)
-	Directory.Delete(backup, true)
+	for dirPath in Directory.GetDirectories(dest, "*"):
+		print "removing dir ${dirPath}"
+		Directory.Delete(dirPath, true)
+	for filePath in Directory.GetFiles(dest, "*.*"):
+		print "deleting file ${filePath}"
+		File.Delete(filePath)
 
 	for dirPath in Directory.GetDirectories(source, "*", SearchOption.AllDirectories):
 		targetDir = dirPath.Replace(source, dest)
@@ -125,4 +112,6 @@ target deploy:
 		targetFile = newPath.Replace(source, dest)
 		cp(newPath, targetFile)
 
+	print "Starting website"
+	exec("C:\\Windows\\system32\\inetsrv\\appcmd.exe", "start site ZeeBi")	
 	

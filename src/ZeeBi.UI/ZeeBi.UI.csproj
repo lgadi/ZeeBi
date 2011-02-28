@@ -109,6 +109,7 @@
     <Content Include="Content\home.css" />
     <Content Include="Content\img\background.png" />
     <Content Include="Content\img\error.png" />
+    <Content Include="Content\img\favicon.ico" />
     <Content Include="Content\img\link.png" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\ok.png" />

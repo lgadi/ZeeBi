@@ -120,7 +120,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\lib\jquery.hint.js" />
-    <Content Include="Scripts\lib\jquery-1.5.min.js" />
+    <Content Include="Scripts\lib\jquery-3.6.3.min.js" />
     <Content Include="Scripts\lib\jquery.validate.min.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
